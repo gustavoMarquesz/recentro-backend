@@ -10,5 +10,4 @@ public interface PropriedadeRepository extends JpaRepository<Propriedade, Long> 
     // FindById, Save, DeleteById, Filter
     // Algo mais personalizado, só colocar o código aqui
 
-
 }
