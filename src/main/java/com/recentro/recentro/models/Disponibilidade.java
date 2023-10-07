@@ -1,29 +1,22 @@
 package com.recentro.recentro.models;
-
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Propriedade {
-
+public class Disponibilidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    private String endereco;
+    private String nomeDaDisponibilidade;
 
-
-    public Object getId() {
-        return this.id;
-    }
 }

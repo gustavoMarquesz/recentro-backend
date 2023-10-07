@@ -36,7 +36,7 @@ public class SwaggerConfig {
                 "1.0",
                 "Termos de Serviço",
                 new Contact("squad16", "https://mgustavo-portf.netlify.app",
-                        "gustavo99a@hotmail.com"),
+                "gustavo99a@hotmail.com"),
                 "Licença Apache Versão 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0",
                 new ArrayList<VendorExtension>()
