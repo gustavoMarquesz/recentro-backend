@@ -12,13 +12,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Licenciamento {
 
-
+    @Id
+    @OneToMany (mappedBy = "Imovel")
     private String nuProcesso;
-    @Column
     private String nuLicenca;
-    @Column
     private String ProcessoAberto2018;
-
-    //@OneToMany (mappedBy = "Imovel")
 
 }

@@ -26,9 +26,6 @@ public class Finanças {
     private String dsq;
     private String tipoEmpreendimento;
     private String areaTotal;
-    
-    @ManyToOne
-    @JoinColumn(name = "bairroId")
-    private Bairro bairro;
+    private String bairro;
 
 }

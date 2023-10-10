@@ -35,7 +35,7 @@ public class Imovel {
     private String plantaRegional;
     private String usoDoImovel;
 
-    // @ManyToOne
-    // @JoinColumn(name = "nuProcesso")
-    // private Licenciamento licenciamento;
+    @ManyToOne
+    @JoinColumn(name = "nuProcesso")
+    private Licenciamento licenciamento;
 }
