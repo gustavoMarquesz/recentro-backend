@@ -13,7 +13,6 @@ import javax.persistence.*;
 public class Licenciamento {
 
     @Id
-    @OneToMany (mappedBy = "Imovel")
     private String nuProcesso;
     private String nuLicenca;
     private String ProcessoAberto2018;

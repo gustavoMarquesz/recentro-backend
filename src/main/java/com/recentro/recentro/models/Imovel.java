@@ -34,8 +34,4 @@ public class Imovel {
     private String latitude;
     private String plantaRegional;
     private String usoDoImovel;
-
-    @ManyToOne
-    @JoinColumn(name = "nuProcesso")
-    private Licenciamento licenciamento;
 }
