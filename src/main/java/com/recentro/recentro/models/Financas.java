@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Finanças {
+public class Financas {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

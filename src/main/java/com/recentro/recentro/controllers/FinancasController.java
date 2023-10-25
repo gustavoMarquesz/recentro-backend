@@ -2,12 +2,12 @@ package com.recentro.recentro.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import com.recentro.recentro.repository.FinançasRepository;
+import com.recentro.recentro.services.FinancasService;
 
 @RestController
-public class FinançasController {
+public class FinancasController {
     
     @Autowired
-    FinançasRepository finançasRepository;
+    FinancasService financasService;
 
 }
