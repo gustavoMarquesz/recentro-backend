@@ -1,30 +1,56 @@
 package com.recentro.recentro.controllers;
 
 import com.recentro.recentro.exceptions.ExistingEmail;
+import com.recentro.recentro.models.LoginRespondeDTO;
 import com.recentro.recentro.models.User;
+import com.recentro.recentro.security.TokenService;
 import com.recentro.recentro.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/user")
-
 public class UserController {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserService userService;
 
-    @RequestMapping( value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody User user) throws ExistingEmail {
-        userService.save(user);
-        URI uri =  ServletUriComponentsBuilder.fromCurrentRequest().path("/register").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+    @Autowired
+    TokenService tokenService;
+
+    @PostMapping("/register")
+    public ResponseEntity save(@RequestBody User user) throws ExistingEmail {
+        String encryptedPassword = passwordEncoder.encode(user.getPassword()); // Use o PasswordEncoder injetado
+
+        User newUser = new User(user.getEmail(), encryptedPassword, user.getRole()); // Salve a senha criptografada
+        userService.save(newUser);
+        return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginRespondeDTO> login(@RequestBody @Validated User user) {
+        var userPassword = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+        var auth = authenticationManager.authenticate(userPassword);
+
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        // Crie uma classe TokenResponseDTO para representar a resposta com o token JWT
+        LoginRespondeDTO responseDTO = new LoginRespondeDTO(token);
+
+        return ResponseEntity.ok(responseDTO);
+    }
+
+
 }

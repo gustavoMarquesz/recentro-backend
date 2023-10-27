@@ -26,6 +26,18 @@ dependencies {
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.32'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.5'
+
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+	// https://mvnrepository.com/artifact/com.auth0/java-jwt
+	implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
+
+
+
+
 }
 
 tasks.named('test') {
