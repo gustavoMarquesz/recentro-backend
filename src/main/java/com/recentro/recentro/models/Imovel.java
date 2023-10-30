@@ -1,28 +1,30 @@
 package com.recentro.recentro.models;
 
-
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Propriedade {
+@AllArgsConstructor
 
+public class Imovel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+
+    @Column
+    @NotNull
     private String endereco;
 
+    public Imovel(String endereco){
+        this.endereco = endereco;
 
-
-
+    }
 }

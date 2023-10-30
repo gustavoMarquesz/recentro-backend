@@ -1,11 +1,10 @@
 package com.recentro.recentro.repository;
 
-import com.recentro.recentro.models.Propriedade;
+import com.recentro.recentro.models.Imovel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
-public interface PropriedadeRepository extends JpaRepository<Propriedade, Long> {
-
-
+public interface ImovelRepository extends JpaRepository<Imovel, Long> {
 }
