@@ -6,6 +6,7 @@ import com.recentro.recentro.repository.ImovelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class ImovelService {
         return propriedade.orElseThrow(() -> new ExistingEmail());
     }
 
-    public List<Imovel> listarPropriedades() {
-        return imovelRepository.findAll();
+    public List<Imovel> listProperties(String address) {
+        return imovelRepository.getPropertyByAddress(address);
     }
 }

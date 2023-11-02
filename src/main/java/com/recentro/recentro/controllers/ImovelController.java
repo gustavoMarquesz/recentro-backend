@@ -31,7 +31,7 @@ public class ImovelController {
     }
 
     @GetMapping("/list")
-    public List<Imovel> listarPropriedades() {
-        return imovelService.listarPropriedades();
+    public List<Imovel> listProperties(@RequestParam String address) {
+        return imovelService.listProperties(address);
     }
 }
