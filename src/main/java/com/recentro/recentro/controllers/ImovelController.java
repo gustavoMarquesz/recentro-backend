@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/imovel")
@@ -31,7 +32,7 @@ public class ImovelController {
     }
 
     @GetMapping("/list")
-    public List<Imovel> listProperties(@RequestParam String address) {
+    public Optional<List<Imovel>> listProperties(@RequestParam(name = "address", defaultValue = "") String address) {
         return imovelService.listProperties(address);
     }
 }

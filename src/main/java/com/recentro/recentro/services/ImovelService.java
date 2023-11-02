@@ -26,7 +26,7 @@ public class ImovelService {
         return propriedade.orElseThrow(() -> new ExistingEmail());
     }
 
-    public List<Imovel> listProperties(String address) {
+    public Optional<List<Imovel>> listProperties(String address) {
         return imovelRepository.getPropertyByAddress(address);
     }
 }
