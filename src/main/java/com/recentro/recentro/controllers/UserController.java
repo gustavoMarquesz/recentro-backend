@@ -32,9 +32,9 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity save(@RequestBody User user) throws ExistingEmail {
-        String encryptedPassword = passwordEncoder.encode(user.getPassword()); // Use o PasswordEncoder injetado
+        String encryptedPassword = passwordEncoder.encode(user.getPassword()); // PasswordEncoder injetado
 
-        User newUser = new User(user.getEmail(), encryptedPassword, user.getRole()); // Salve a senha criptografada
+        User newUser = new User(user.getEmail(), encryptedPassword, user.getRole()); // senha criptografada
         userService.save(newUser);
         return ResponseEntity.ok().build();
     }
@@ -45,7 +45,6 @@ public class UserController {
         var auth = authenticationManager.authenticate(userPassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
-
         // Crie uma classe TokenResponseDTO para representar a resposta com o token JWT
         LoginRespondeDTO responseDTO = new LoginRespondeDTO(token);
 

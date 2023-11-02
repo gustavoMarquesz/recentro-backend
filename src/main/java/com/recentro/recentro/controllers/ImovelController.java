@@ -30,7 +30,7 @@ public class ImovelController {
         return ResponseEntity.ok().body(imovel);
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/list")
     public List<Imovel> listarPropriedades() {
         return imovelService.listarPropriedades();
     }
