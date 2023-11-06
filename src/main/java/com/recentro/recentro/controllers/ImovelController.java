@@ -2,6 +2,7 @@ package com.recentro.recentro.controllers;
 
 
 import com.recentro.recentro.exceptions.ExistingEmail;
+import com.recentro.recentro.exceptions.ImovelNotFound;
 import com.recentro.recentro.models.Imovel;
 import com.recentro.recentro.models.User;
 import com.recentro.recentro.services.ImovelService;
@@ -25,7 +26,7 @@ public class ImovelController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Long id) throws ExistingEmail {
+    public ResponseEntity<?> find(@PathVariable Long id) throws  ImovelNotFound {
         Imovel imovel = imovelService.find(id);
         return ResponseEntity.ok().body(imovel);
     }

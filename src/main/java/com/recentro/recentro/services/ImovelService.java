@@ -1,6 +1,7 @@
 package com.recentro.recentro.services;
 
 import com.recentro.recentro.exceptions.ExistingEmail;
+import com.recentro.recentro.exceptions.ImovelNotFound;
 import com.recentro.recentro.models.Imovel;
 import com.recentro.recentro.repository.ImovelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class ImovelService {
          return imovelRepository.save(imovel);
     }
 
-    public Imovel find(Long id) throws ExistingEmail {
+    public Imovel find(Long id) throws ImovelNotFound {
         Optional<Imovel> propriedade = imovelRepository.findById(id);
-        return propriedade.orElseThrow(() -> new ExistingEmail());
+        return propriedade.orElseThrow(() -> new ImovelNotFound());
     }
 
     public List<Imovel> listarPropriedades() {
