@@ -1,9 +1,7 @@
 package com.recentro.recentro.controllers;
 
-import com.recentro.recentro.models.Financas;
-import com.recentro.recentro.models.Imovel;
-import com.recentro.recentro.models.Licenciamento;
-import com.recentro.recentro.models.Lote;
+import com.recentro.recentro.exceptions.ExistingEmail;
+import com.recentro.recentro.models.*;
 import com.recentro.recentro.services.FinancasService;
 import com.recentro.recentro.services.ImovelService;
 import com.recentro.recentro.services.LicenciamentoService;
@@ -34,16 +32,16 @@ public class ImovelController {
     LicenciamentoService licenciamentoService;
 
     @PostMapping("/register")
-    public ResponseEntity save(@RequestBody Imovel i, @RequestBody Financas f, @RequestBody Lote lo, @RequestBody Licenciamento li) {
-        imovelService.savePropriedade(i);
-        financasService.savePropriedade(f);
-        loteService.savePropriedade(lo);
-        licenciamentoService.savePropriedade(li);
+    public ResponseEntity save(@RequestBody PropertyInformation property) {
+        imovelService.savePropriedade(property.getImovel());
+        financasService.savePropriedade(property.getFinancas());
+        loteService.savePropriedade(property.getLote());
+        licenciamentoService.savePropriedade(property.getLicenciamento());
         return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Long id) {
+    public ResponseEntity<?> find(@PathVariable Long id) throws ExistingEmail {
         HashMap<String, Object> responseBody = new HashMap<>();
         responseBody.put("imovel", imovelService.findById(id));
         responseBody.put("financas", financasService.findById(id));
@@ -53,17 +51,19 @@ public class ImovelController {
     }
 
     @GetMapping("/list")
-    public List<?> listarPropriedades() {
+    public List<?> listarPropriedades (
+            @RequestParam(name = "address", defaultValue = "") String address
+    ) throws Exception {
+
         List<Object> propriedades = new ArrayList<>();
-        List <Imovel> imoveis = imovelService.findAll();
+
+        List <Imovel> imoveis = imovelService.listProperties(address);
         List <Financas> financas = financasService.findAll();
         List <Lote> lotes = loteService.findAll();
         List <Licenciamento> licenciamentos = licenciamentoService.findAll();
+
         for (int i = 0; i < imoveis.size(); i++) {
             propriedades.add(imoveis.get(i));
-            propriedades.add(financas.get(i));
-            propriedades.add(lotes.get(i));
-            propriedades.add(licenciamentos.get(i));
         }
         return propriedades;
     }
