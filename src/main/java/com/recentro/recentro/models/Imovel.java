@@ -19,6 +19,7 @@ public class Imovel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    public String endereco;
     public String contatoProprietario;
     private String proprietarioCartorio;
     private String observacao;
@@ -32,4 +33,21 @@ public class Imovel {
     private String latitude;
     private String plantaRegional;
     private String usoDoImovel;
+
+    public Imovel(PropertyInformation property) {
+        this.endereco = property.getImovel().getEndereco();
+        this.contatoProprietario = property.getImovel().getContatoProprietario();
+        this.proprietarioCartorio = property.getImovel().getProprietarioCartorio();
+        this.observacao = property.getImovel().getObservacao();
+        this.descricaoJudicializacao = property.getImovel().getJudicializacao();
+        this.proprietarioCampo = property.getImovel().getProprietarioCampo();
+        this.planta = property.getImovel().getPlanta();
+        this.rgi = property.getImovel().getRgi();
+        this.valorDoAluguel = property.getImovel().getValorDoAluguel();
+        this.judicializacao = property.getImovel().getJudicializacao();
+        this.longetude = property.getImovel().getLongetude();
+        this.latitude = property.getImovel().getLatitude();
+        this.plantaRegional = property.getImovel().getPlantaRegional();
+        this.usoDoImovel = property.getImovel().usoDoImovel;
+    }
 }

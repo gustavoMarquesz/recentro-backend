@@ -32,5 +32,21 @@ public class Lote {
     private String situacao;
     private String disponibilidade;
 
-
+    public Lote(PropertyInformation property) {
+        this.nomeEdificil = property.getLote().getNomeEdificil();
+        this.autorizacaoDeInformacao = property.getLote().getAutorizacaoDeInformacao();
+        this.tributacao = property.getLote().getTributacao();
+        this.proprietarioLocalizado = property.getLote().getProprietarioLocalizado();
+        this.restauranteCafes = property.getLote().getRestauranteCafes();
+        this.qualInvestimento = property.getLote().getQualInvestimento();
+        this.pichacao = property.getLote().getPichacao();
+        this.obsevacao = property.getLote().getObsevacao();
+        this.atividadeDeFuncionament = property.getLote().getAtividadeDeFuncionament();
+        this.acessibilidade = property.getLote().getAcessibilidade();
+        this.laudo = property.getLote().getLaudo();
+        this.numeroPavimentoEmUso = property.getLote().getNumeroPavimentoEmUso();
+        this.grauDeRisco = property.getLote().getNumeroPavimentoEmUso();
+        this.situacao = property.getLote().getSituacao();
+        this.disponibilidade = property.getLote().getDisponibilidade();
+    }
 }
