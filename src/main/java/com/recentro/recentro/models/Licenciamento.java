@@ -19,4 +19,10 @@ public class Licenciamento {
     private String nuLicenca;
     private String ProcessoAberto2018;
 
+    public Licenciamento(PropertyInformation property) {
+        this.nuProcesso = property.getLicenciamento().getNuProcesso();
+        this.nuLicenca = property.getLicenciamento().getNuLicenca();
+        this.ProcessoAberto2018 = property.getLicenciamento().getProcessoAberto2018();
+    }
+
 }

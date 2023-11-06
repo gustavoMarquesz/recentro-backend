@@ -26,4 +26,13 @@ public class Financas {
     private String areaTotal;
     private String bairro;
 
+    public Financas(PropertyInformation property) {
+        this.dsqfl = property.getFinancas().getDsqfl();
+        this.numero = property.getFinancas().getNumero();
+        this.rua = property.getFinancas().getRua();
+        this.dsq = property.getFinancas().getDsq();
+        this.tipoEmpreendimento = property.getFinancas().getTipoEmpreendimento();
+        this.areaTotal = property.getFinancas().getAreaTotal();
+        this.bairro = property.getFinancas().getBairro();
+    }
 }
