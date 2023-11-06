@@ -39,7 +39,7 @@ public class SecurityConfigurations {
                 .authorizeRequests(authorize -> authorize
                         .antMatchers(HttpMethod.POST, "/user/register").permitAll()
                         .antMatchers(HttpMethod.POST, "/user/login").permitAll()
-                        .antMatchers(HttpMethod.POST, "/imovel/list").permitAll()
+                        .antMatchers(HttpMethod.GET, "/imovel/list").permitAll()
                         .antMatchers(HttpMethod.POST, "/imovel/register").hasRole("ADMIN")
                         .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v2/api-docs", "/swagger-resources/**", "/webjars/**").permitAll()
                         .anyRequest().authenticated()
