@@ -7,6 +7,7 @@ import com.recentro.recentro.services.ImovelService;
 import com.recentro.recentro.services.LicenciamentoService;
 import com.recentro.recentro.services.LoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,5 +67,24 @@ public class ImovelController {
             propriedades.add(imoveis.get(i));
         }
         return propriedades;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletePropriedades(@PathVariable(value="id") Long id) throws ExistingEmail {
+        imovelService.deletePropriedade(id);
+        financasService.deletePropriedade(id);
+        loteService.deletePropriedade(id);
+        licenciamentoService.deletePropriedade(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Imovel deleted successfully.");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updatePropriedade(@PathVariable(value="id") Long id,
+                                                    @RequestBody PropertyInformation property) throws Exception {
+        imovelService.updatePropriedade(id, property.getImovel());
+        licenciamentoService.updatePropriedade(id, property.getLicenciamento());
+        loteService.updatePropriedade(id, property.getLote());
+        financasService.updatePropriedade(id, property.getFinancas());
+        return ResponseEntity.status(HttpStatus.OK).body("Imovel modified successfully.");
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -20,6 +19,12 @@ public class ImovelService {
 
     public Imovel savePropriedade(Imovel imovel){
          return imovelRepository.save(imovel);
+    }
+
+    public void deletePropriedade(Long id){
+        Imovel i = imovelRepository.getById(id);
+        imovelRepository.delete(i);
+        return ;
     }
 
     public Imovel findById(Long id) throws ExistingEmail {
@@ -35,5 +40,31 @@ public class ImovelService {
         }
 
         throw new Exception();
+    }
+
+    public Imovel updatePropriedade(Long id, Imovel imovel) throws Exception {
+        Optional<Imovel> existingImovel = imovelRepository.findById(id);
+
+        if (existingImovel.isPresent()) {
+            Imovel updatedImovel = existingImovel.get();
+            updatedImovel.setEndereco(imovel.getEndereco());
+            updatedImovel.setLatitude(imovel.getLatitude());
+            updatedImovel.setJudicializacao(imovel.getJudicializacao());
+            updatedImovel.setUsoDoImovel(imovel.getUsoDoImovel());
+            updatedImovel.setObservacao(imovel.getObservacao());
+            updatedImovel.setContatoProprietario(imovel.getContatoProprietario());
+            updatedImovel.setProprietarioCartorio(imovel.getProprietarioCartorio());
+            updatedImovel.setDescricaoJudicializacao(imovel.getDescricaoJudicializacao());
+            updatedImovel.setProprietarioCampo(imovel.getProprietarioCampo());
+            updatedImovel.setPlanta(imovel.getPlanta());
+            updatedImovel.setRgi(imovel.getRgi());
+            updatedImovel.setValorDoAluguel(imovel.getValorDoAluguel());
+            updatedImovel.setLongetude(imovel.getLongetude());
+            updatedImovel.setPlantaRegional(imovel.getPlantaRegional());
+
+            return imovelRepository.save(updatedImovel);
+        } else {
+            throw new Exception("Imovel not found");
+        }
     }
 }

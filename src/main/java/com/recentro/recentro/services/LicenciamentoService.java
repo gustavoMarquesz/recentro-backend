@@ -19,6 +19,12 @@ public class LicenciamentoService {
         return licenciamento;
     }
 
+    public void deletePropriedade(Long id) {
+        Licenciamento l = licenciamentoRepository.getById(id);
+        licenciamentoRepository.delete(l);
+        return ;
+    }
+
     public List<Licenciamento> findAll() {
         return licenciamentoRepository.findAll();
     }
@@ -29,5 +35,20 @@ public class LicenciamentoService {
 
     public void delete(Licenciamento licenciamento) {
         licenciamentoRepository.delete(licenciamento);
+    }
+
+    public Licenciamento updatePropriedade(Long id, Licenciamento licenciamento) throws Exception {
+        Optional<Licenciamento> existingLicenciamento = licenciamentoRepository.findById(id);
+
+        if (existingLicenciamento.isPresent()) {
+            Licenciamento updatedLicenciamento = existingLicenciamento.get();
+            updatedLicenciamento.setNuProcesso(licenciamento.getNuProcesso());
+            updatedLicenciamento.setNuLicenca(licenciamento.getNuLicenca());
+            updatedLicenciamento.setProcessoAberto2018(licenciamento.getProcessoAberto2018());
+
+            return licenciamentoRepository.save(updatedLicenciamento);
+        } else {
+            throw new Exception("Licenciamento not found");
+        }
     }
 }

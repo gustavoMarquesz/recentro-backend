@@ -18,6 +18,12 @@ public class FinancasService {
         return financas;
     }
 
+    public void deletePropriedade(Long id) {
+        Financas f = financasRepository.getById(id);
+        financasRepository.delete(f);
+        return;
+    }
+
     public List<Financas> findAll() {
         return financasRepository.findAll();
     }
@@ -28,5 +34,24 @@ public class FinancasService {
 
     public void delete(Financas financas) {
         financasRepository.delete(financas);
+    }
+
+    public Financas updatePropriedade(Long id, Financas financas) throws Exception {
+        Optional<Financas> existingFinancas = financasRepository.findById(id);
+
+        if (existingFinancas.isPresent()) {
+            Financas updatedFinancas = existingFinancas.get();
+            updatedFinancas.setDsqfl(financas.getDsqfl());
+            updatedFinancas.setNumero(financas.getNumero());
+            updatedFinancas.setRua(financas.getRua());
+            updatedFinancas.setDsq(financas.getDsq());
+            updatedFinancas.setTipoEmpreendimento(financas.getTipoEmpreendimento());
+            updatedFinancas.setAreaTotal(financas.getAreaTotal());
+            updatedFinancas.setBairro(financas.getBairro());
+
+            return financasRepository.save(updatedFinancas);
+        } else {
+            throw new Exception("Financas not found");
+        }
     }
 }
