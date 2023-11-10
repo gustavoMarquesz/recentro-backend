@@ -1,7 +1,6 @@
 package com.recentro.recentro.models.lot;
 
 import com.recentro.recentro.models.PropertyInformation;
-import com.recentro.recentro.models.property.Property;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -51,5 +50,23 @@ public class Lot {
         this.grauDeRisco = property.getLot().getNumeroPavimentoEmUso();
         this.situacao = property.getLot().getSituacao();
         this.disponibilidade = property.getLot().getDisponibilidade();
+    }
+
+    public Lot(LotDTO property) {
+        this.nomeEdificil = property.getNomeEdificil();
+        this.autorizacaoDeInformacao = property.getAutorizacaoDeInformacao();
+        this.tributacao = property.getTributacao();
+        this.proprietarioLocalizado = property.getProprietarioLocalizado();
+        this.restauranteCafes = property.getRestauranteCafes();
+        this.qualInvestimento = property.getQualInvestimento();
+        this.pichacao = property.getPichacao();
+        this.obsevacao = property.getObsevacao();
+        this.atividadeDeFuncionament = property.getAtividadeDeFuncionament();
+        this.acessibilidade = property.getAcessibilidade();
+        this.laudo = property.getLaudo();
+        this.numeroPavimentoEmUso = property.getNumeroPavimentoEmUso();
+        this.grauDeRisco = property.getNumeroPavimentoEmUso();
+        this.situacao = property.getSituacao();
+        this.disponibilidade = property.getDisponibilidade();
     }
 }

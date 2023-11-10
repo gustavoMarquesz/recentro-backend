@@ -42,4 +42,22 @@ public class LotDTO {
         this.situacao = property.getLot().getSituacao();
         this.disponibilidade = property.getLot().getDisponibilidade();
     }
+
+    public LotDTO(Lot property) {
+        this.nomeEdificil = property.getNomeEdificil();
+        this.autorizacaoDeInformacao = property.getAutorizacaoDeInformacao();
+        this.tributacao = property.getTributacao();
+        this.proprietarioLocalizado = property.getProprietarioLocalizado();
+        this.restauranteCafes = property.getRestauranteCafes();
+        this.qualInvestimento = property.getQualInvestimento();
+        this.pichacao = property.getPichacao();
+        this.obsevacao = property.getObsevacao();
+        this.atividadeDeFuncionament = property.getAtividadeDeFuncionament();
+        this.acessibilidade = property.getAcessibilidade();
+        this.laudo = property.getLaudo();
+        this.numeroPavimentoEmUso = property.getNumeroPavimentoEmUso();
+        this.grauDeRisco = property.getNumeroPavimentoEmUso();
+        this.situacao = property.getSituacao();
+        this.disponibilidade = property.getDisponibilidade();
+    }
 }

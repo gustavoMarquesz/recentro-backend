@@ -49,4 +49,21 @@ public class Property {
         this.plantaRegional = property.getProperty().getPlantaRegional();
         this.usoDoImovel = property.getProperty().getUsoDoImovel();
     }
+
+    public Property(PropertyDTO property) {
+        this.endereco = property.getEndereco();
+        this.contatoProprietario = property.getContatoProprietario();
+        this.proprietarioCartorio = property.getProprietarioCartorio();
+        this.observacao = property.getObservacao();
+        this.descricaoJudicializacao = property.getJudicializacao();
+        this.proprietarioCampo = property.getProprietarioCampo();
+        this.planta = property.getPlanta();
+        this.rgi = property.getRgi();
+        this.valorDoAluguel = property.getValorDoAluguel();
+        this.judicializacao = property.getJudicializacao();
+        this.longetude = property.getLongetude();
+        this.latitude = property.getLatitude();
+        this.plantaRegional = property.getPlantaRegional();
+        this.usoDoImovel = property.getUsoDoImovel();
+    }
 }

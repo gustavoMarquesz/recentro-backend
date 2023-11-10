@@ -1,47 +1,48 @@
 package com.recentro.recentro.services;
-import com.recentro.recentro.models.Lote;
+import com.recentro.recentro.models.lot.Lot;
+import com.recentro.recentro.models.lot.LotDTO;
 import com.recentro.recentro.repository.LoteRepository;
 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoteService {
+public class LotService {
 
     @Autowired
     LoteRepository loteRepository;
 
-    public Lote savePropriedade(Lote lote) {
-        loteRepository.save(lote);
-        return lote;
-    }
-
-    public void deletePropriedade(Long id) {
-        Lote l = loteRepository.getById(id);
-        loteRepository.delete(l);
+    public void saveLot(LotDTO lotParam) {
+        Lot lot = new Lot(lotParam);
+        loteRepository.save(lot);
         return ;
     }
 
-    public List<Lote> findAll() {
+    public void deleteLot(Long id) {
+        Lot lot = loteRepository.getById(id);
+        loteRepository.delete(lot);
+        return ;
+    }
+
+    public List<Lot> findAll() {
         return loteRepository.findAll();
     }
 
-    public Optional<Lote> findById(Long id) {
+    public Optional<Lot> findById(Long id) {
         return loteRepository.findById(id);
     }
 
-    public void delete(Lote lote) {
-        loteRepository.delete(lote);
-    }
+//    public void deleteLot(Long id) {
+//        loteRepository.delete(id);
+//    }
 
-    public Lote updatePropriedade(Long id, Lote lote) throws Exception {
-        Optional<Lote> existingLote = loteRepository.findById(id);
+    public Lot updateProperty(Long id, Lot lote) throws Exception {
+        Optional<Lot> existingLote = loteRepository.findById(id);
 
         if (existingLote.isPresent()) {
-            Lote updatedLote = existingLote.get();
+            Lot updatedLote = existingLote.get();
             updatedLote.setNomeEdificil(lote.getNomeEdificil());
             updatedLote.setAutorizacaoDeInformacao(lote.getAutorizacaoDeInformacao());
             updatedLote.setTributacao(lote.getTributacao());

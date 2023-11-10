@@ -13,4 +13,10 @@ public class UserDTO {
     String email;
     String password;
     UserRole role;
+
+    public UserDTO(User user) {
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.role = user.getRole();
+    }
 }

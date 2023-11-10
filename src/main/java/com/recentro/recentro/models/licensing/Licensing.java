@@ -1,7 +1,6 @@
 package com.recentro.recentro.models.licensing;
 
 import com.recentro.recentro.models.PropertyInformation;
-import com.recentro.recentro.models.property.Property;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +24,12 @@ public class Licensing {
         this.nuProcesso = property.getLicensing().getNuProcesso();
         this.nuLicenca = property.getLicensing().getNuLicenca();
         this.ProcessoAberto2018 = property.getLicensing().getProcessoAberto2018();
+    }
+
+    public Licensing(LicensingDTO property) {
+        this.nuProcesso = property.getNuProcesso();
+        this.nuLicenca = property.getNuLicenca();
+        this.ProcessoAberto2018 = property.getProcessoAberto2018();
     }
 
 }

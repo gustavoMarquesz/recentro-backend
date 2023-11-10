@@ -36,7 +36,8 @@ public class UserController {
         String encryptedPassword = passwordEncoder.encode(user.getPassword()); // PasswordEncoder injetado
 
         User newUser = new User(user.getEmail(), encryptedPassword, user.getRole()); // senha criptografada
-        userService.save(newUser);
+        UserDTO newUserDTO = new UserDTO(newUser);
+        userService.save(newUserDTO);
         return ResponseEntity.ok().build();
     }
 

@@ -17,4 +17,10 @@ public class LicensingDTO {
         this.nuLicenca = property.getLicensing().getNuLicenca();
         this.ProcessoAberto2018 = property.getLicensing().getProcessoAberto2018();
     }
+
+    public LicensingDTO(Licensing property) {
+        this.nuProcesso = property.getNuProcesso();
+        this.nuLicenca = property.getNuLicenca();
+        this.ProcessoAberto2018 = property.getProcessoAberto2018();
+    }
 }
