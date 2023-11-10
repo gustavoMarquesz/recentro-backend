@@ -12,8 +12,8 @@ import java.util.Optional;
 @Repository
 public interface ImovelRepository extends JpaRepository<Imovel, Long> {
 
-    @Query("SELECT obj FROM Imovel obj " +
-            "WHERE UPPER(obj.endereco) LIKE UPPER(CONCAT('%', :address, '%'))"
+    @Query("SELECT address FROM Imovel address " +
+            "WHERE UPPER(address.endereco) LIKE UPPER(CONCAT('%', :address, '%'))"
     )
     Optional<List<Imovel>> getPropertyByAddress(String address);
 }

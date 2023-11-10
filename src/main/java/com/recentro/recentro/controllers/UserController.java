@@ -2,7 +2,8 @@ package com.recentro.recentro.controllers;
 
 import com.recentro.recentro.exceptions.ExistingEmail;
 import com.recentro.recentro.models.LoginRespondeDTO;
-import com.recentro.recentro.models.User;
+import com.recentro.recentro.models.user.User;
+import com.recentro.recentro.models.user.UserDTO;
 import com.recentro.recentro.security.TokenService;
 import com.recentro.recentro.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class UserController {
     TokenService tokenService;
 
     @PostMapping("/register")
-    public ResponseEntity save(@RequestBody User user) throws ExistingEmail {
+    public ResponseEntity<Void> save(@RequestBody UserDTO user) throws ExistingEmail {
         String encryptedPassword = passwordEncoder.encode(user.getPassword()); // PasswordEncoder injetado
 
         User newUser = new User(user.getEmail(), encryptedPassword, user.getRole()); // senha criptografada
@@ -40,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginRespondeDTO> login(@RequestBody @Validated User user) {
+    public ResponseEntity<LoginRespondeDTO> login(@RequestBody @Validated UserDTO user) {
         var userPassword = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         var auth = authenticationManager.authenticate(userPassword);
 

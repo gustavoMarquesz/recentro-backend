@@ -2,6 +2,10 @@ package com.recentro.recentro.controllers;
 
 import com.recentro.recentro.exceptions.ExistingEmail;
 import com.recentro.recentro.models.*;
+import com.recentro.recentro.models.finances.Finances;
+import com.recentro.recentro.models.licensing.Licensing;
+import com.recentro.recentro.models.lot.Lot;
+import com.recentro.recentro.models.property.Property;
 import com.recentro.recentro.services.FinancasService;
 import com.recentro.recentro.services.ImovelService;
 import com.recentro.recentro.services.LicenciamentoService;
@@ -14,12 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/imovel")
 public class ImovelController {
-    
+
     @Autowired
     ImovelService imovelService;
 
@@ -33,11 +36,11 @@ public class ImovelController {
     LicenciamentoService licenciamentoService;
 
     @PostMapping("/register")
-    public ResponseEntity save(@RequestBody PropertyInformation property) {
-        imovelService.savePropriedade(property.getImovel());
-        financasService.savePropriedade(property.getFinancas());
-        loteService.savePropriedade(property.getLote());
-        licenciamentoService.savePropriedade(property.getLicenciamento());
+    public ResponseEntity<Void> save(@RequestBody PropertyInformation property) {
+        financasService.savePropriedade(property.getFinances());
+        loteService.savePropriedade(property.getLot());
+        licenciamentoService.savePropriedade(property.getLicensing());
+        imovelService.savePropriedade(property.getProperty());
         return ResponseEntity.ok().build();
     }
 
@@ -58,10 +61,10 @@ public class ImovelController {
 
         List<Object> propriedades = new ArrayList<>();
 
-        List <Imovel> imoveis = imovelService.listProperties(address);
-        List <Financas> financas = financasService.findAll();
-        List <Lote> lotes = loteService.findAll();
-        List <Licenciamento> licenciamentos = licenciamentoService.findAll();
+        List <Property> imoveis = imovelService.listProperties(address);
+        List <Finances> financas = financasService.findAll();
+        List <Lot> lots = loteService.findAll();
+        List <Licensing> licensings = licenciamentoService.findAll();
 
         for (int i = 0; i < imoveis.size(); i++) {
             propriedades.add(imoveis.get(i));
@@ -81,10 +84,10 @@ public class ImovelController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updatePropriedade(@PathVariable(value="id") Long id,
                                                     @RequestBody PropertyInformation property) throws Exception {
-        imovelService.updatePropriedade(id, property.getImovel());
-        licenciamentoService.updatePropriedade(id, property.getLicenciamento());
-        loteService.updatePropriedade(id, property.getLote());
-        financasService.updatePropriedade(id, property.getFinancas());
+        imovelService.updatePropriedade(id, property.getProperty());
+        licenciamentoService.updatePropriedade(id, property.getLicensing());
+        loteService.updatePropriedade(id, property.getLot());
+        financasService.updatePropriedade(id, property.getFinances());
         return ResponseEntity.status(HttpStatus.OK).body("Imovel modified successfully.");
     }
 }
