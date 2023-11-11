@@ -12,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Lote {
     @Id
+    @Column(name = "Lote_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
@@ -31,6 +32,9 @@ public class Lote {
     private String grauDeRisco;
     private String situacao;
     private String disponibilidade;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "lote")
+    private Imovel owner;
 
     public Lote(PropertyInformation property) {
         this.nomeEdificil = property.getLote().getNomeEdificil();
