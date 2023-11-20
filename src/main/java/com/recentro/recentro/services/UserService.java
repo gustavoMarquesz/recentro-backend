@@ -1,7 +1,8 @@
 package com.recentro.recentro.services;
 
 import com.recentro.recentro.exceptions.ExistingEmail;
-import com.recentro.recentro.models.User;
+import com.recentro.recentro.models.user.User;
+import com.recentro.recentro.models.user.UserDTO;
 import com.recentro.recentro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,16 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User save(User user) throws ExistingEmail {
-        User emailCondicion = userRepository.findByEmail(user.getEmail());
+    public UserDTO save(UserDTO userParam) throws ExistingEmail {
+        User emailCondition = userRepository.findByEmail(userParam.getEmail());
 
-        if (emailCondicion != null) {
+        if (emailCondition != null) {
             throw new ExistingEmail();
         }
-        return userRepository.save(user);
+
+        User user = new User(userParam);
+        User userToBeSaved = userRepository.save(user);
+        UserDTO savedUser = new UserDTO(userToBeSaved);
+        return savedUser;
     }
 }

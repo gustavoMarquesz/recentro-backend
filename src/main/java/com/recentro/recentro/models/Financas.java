@@ -3,8 +3,10 @@ package com.recentro.recentro.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 @Entity
@@ -14,7 +16,6 @@ import javax.persistence.*;
 public class Financas {
     
     @Id
-    @Column(name = "Finan_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public String dsqfl;
@@ -24,9 +25,6 @@ public class Financas {
     private String tipoEmpreendimento;
     private String areaTotal;
     private String bairro;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "financas")
-    private Imovel owner;
 
     public Financas(PropertyInformation property) {
         this.dsqfl = property.getFinancas().getDsqfl();

@@ -1,5 +1,6 @@
-package com.recentro.recentro.models;
+package com.recentro.recentro.models.user;
 
+import com.recentro.recentro.models.UserRole;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,7 +8,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -39,9 +39,13 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.role = role;
-
     }
 
+    public User(UserDTO user) {
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.role = user.getRole();
+    }
 
 
     @Override

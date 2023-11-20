@@ -3,8 +3,10 @@ package com.recentro.recentro.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 @Entity
@@ -14,7 +16,6 @@ import javax.persistence.*;
 public class Imovel {
     
     @Id
-    @Column(name = "Imovel_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
@@ -32,18 +33,6 @@ public class Imovel {
     private String latitude;
     private String plantaRegional;
     private String usoDoImovel;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="Lote_ID")
-    private Lote lote;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="Finan_ID")
-    private Financas financas;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="Licen_ID")
-    private Licenciamento licenciamento;
 
     public Imovel(PropertyInformation property) {
         this.endereco = property.getImovel().getEndereco();
