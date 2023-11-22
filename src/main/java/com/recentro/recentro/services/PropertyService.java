@@ -4,6 +4,7 @@ import com.recentro.recentro.exceptions.ExistingEmail;
 import com.recentro.recentro.models.property.Property;
 import com.recentro.recentro.models.property.PropertyDTO;
 import com.recentro.recentro.repository.PropertyRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,6 @@ public class PropertyService {
     public void deleteProperty(Long id){
         Property propertyId = propertyRepository.getById(id);
         propertyRepository.delete(propertyId);
-        return ;
     }
 
     public PropertyDTO findById(Long id) throws ExistingEmail {
@@ -45,36 +45,20 @@ public class PropertyService {
 
         if (properties.isPresent()) {
             List<Property> propertiesFromOptionalToList = new ArrayList<>(properties.get());
-            List<PropertyDTO> fromListOfPropertiesToListOfPropertiesDTO = propertiesFromOptionalToList.stream().map(property -> new PropertyDTO(property)).collect(Collectors.toList());
-            return fromListOfPropertiesToListOfPropertiesDTO;
+            return propertiesFromOptionalToList.stream().map(PropertyDTO::new).collect(Collectors.toList());
         }
-
         throw new Exception();
     }
 
-//    public Imovel updatePropriedade(Long id, Imovel imovel) throws Exception {
-//        Optional<Imovel> existingImovel = imovelRepository.findById(id);
-//
-//        if (existingImovel.isPresent()) {
-//            Imovel updatedImovel = existingImovel.get();
-//            updatedImovel.setEndereco(imovel.getEndereco());
-//            updatedImovel.setLatitude(imovel.getLatitude());
-//            updatedImovel.setJudicializacao(imovel.getJudicializacao());
-//            updatedImovel.setUsoDoImovel(imovel.getUsoDoImovel());
-//            updatedImovel.setObservacao(imovel.getObservacao());
-//            updatedImovel.setContatoProprietario(imovel.getContatoProprietario());
-//            updatedImovel.setProprietarioCartorio(imovel.getProprietarioCartorio());
-//            updatedImovel.setDescricaoJudicializacao(imovel.getDescricaoJudicializacao());
-//            updatedImovel.setProprietarioCampo(imovel.getProprietarioCampo());
-//            updatedImovel.setPlanta(imovel.getPlanta());
-//            updatedImovel.setRgi(imovel.getRgi());
-//            updatedImovel.setValorDoAluguel(imovel.getValorDoAluguel());
-//            updatedImovel.setLongetude(imovel.getLongetude());
-//            updatedImovel.setPlantaRegional(imovel.getPlantaRegional());
-//
-//            return imovelRepository.save(updatedImovel);
-//        } else {
-//            throw new Exception("Imovel not found");
-//        }
-//    }
+    public Property updateProperty(Long id, PropertyDTO propertyParam) throws Exception {
+        Optional<Property> existingProperty = propertyRepository.findById(id);
+
+        if (existingProperty.isPresent()) {
+            Property propertyModel = existingProperty.get();
+            BeanUtils.copyProperties(propertyParam, propertyModel);
+            return propertyRepository.save(propertyModel);
+        } else {
+            throw new Exception("Property not found");
+        }
+    }
 }
