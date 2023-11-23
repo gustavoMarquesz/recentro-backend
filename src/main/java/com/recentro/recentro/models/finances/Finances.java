@@ -1,6 +1,5 @@
 package com.recentro.recentro.models.finances;
 
-import com.recentro.recentro.models.PropertyInformation;
 import com.recentro.recentro.models.property.Property;
 import lombok.AllArgsConstructor;
 import lombok.Data;

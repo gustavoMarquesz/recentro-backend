@@ -5,6 +5,8 @@ import com.recentro.recentro.repository.LoteRepository;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +27,6 @@ public class LotService {
     public void deleteLot(Long id) {
         Lot lot = loteRepository.getById(id);
         loteRepository.delete(lot);
-        return ;
     }
 
     public List<Lot> findAll() {
@@ -36,34 +37,16 @@ public class LotService {
         return loteRepository.findById(id);
     }
 
-//    public void deleteLot(Long id) {
-//        loteRepository.delete(id);
-//    }
+    public Lot updateLot(Long id, LotRequestDTO loteParam) throws Exception {
+        Optional<Lot> existingLot = loteRepository.findById(id);
 
-    public Lot updateProperty(Long id, Lot lote) throws Exception {
-        Optional<Lot> existingLote = loteRepository.findById(id);
-
-        if (existingLote.isPresent()) {
-            Lot updatedLote = existingLote.get();
-            updatedLote.setNomeEdificil(lote.getNomeEdificil());
-            updatedLote.setAutorizacaoDeInformacao(lote.getAutorizacaoDeInformacao());
-            updatedLote.setTributacao(lote.getTributacao());
-            updatedLote.setProprietarioLocalizado(lote.getProprietarioLocalizado());
-            updatedLote.setRestauranteCafes(lote.getRestauranteCafes());
-            updatedLote.setQualInvestimento(lote.getQualInvestimento());
-            updatedLote.setPichacao(lote.getPichacao());
-            updatedLote.setObsevacao(lote.getObsevacao());
-            updatedLote.setAtividadeDeFuncionamento(lote.getAtividadeDeFuncionamento());
-            updatedLote.setAcessibilidade(lote.getAcessibilidade());
-            updatedLote.setLaudo(lote.getLaudo());
-            updatedLote.setNumeroPavimentoEmUso(lote.getNumeroPavimentoEmUso());
-            updatedLote.setGrauDeRisco(lote.getNumeroPavimentoEmUso());
-            updatedLote.setSituacao(lote.getSituacao());
-            updatedLote.setDisponibilidade(lote.getDisponibilidade());
-
-            return loteRepository.save(updatedLote);
+        if (existingLot.isPresent()) {
+            Lot loteModel = existingLot.get();
+            BeanUtils.copyProperties(loteParam, loteModel);
+            return loteRepository.save(loteModel);
         } else {
             throw new Exception("Lote not found");
         }
     }
+
 }

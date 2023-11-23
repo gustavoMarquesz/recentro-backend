@@ -1,6 +1,5 @@
 package com.recentro.recentro.models.property;
 
-import com.recentro.recentro.models.PropertyInformation;
 import com.recentro.recentro.models.finances.Finances;
 import com.recentro.recentro.models.licensing.Licensing;
 import com.recentro.recentro.models.lot.Lot;
@@ -9,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 
 @Entity
 @Data
@@ -24,12 +22,14 @@ public class Property {
     public String endereco;
     public String contatoProprietario;
     private String proprietarioCartorio;
+    private String coincidenciaProprietario;
     private String observacao;
     private String descricaoJudicializacao;
     private String proprietarioCampo;
     private String planta;
     private String rgi;
     private String valorDoAluguel;
+    private String valorDeVenda;
     private String judicializacao;
     private String longetude;
     private String latitude;
@@ -51,12 +51,14 @@ public class Property {
         this.endereco = property.getEndereco();
         this.contatoProprietario = property.getContatoProprietario();
         this.proprietarioCartorio = property.getProprietarioCartorio();
+        this.coincidenciaProprietario = property.getCoincidenciaProprietario();
         this.observacao = property.getObservacao();
         this.descricaoJudicializacao = property.getJudicializacao();
         this.proprietarioCampo = property.getProprietarioCampo();
         this.planta = property.getPlanta();
         this.rgi = property.getRgi();
         this.valorDoAluguel = property.getValorDoAluguel();
+        this.valorDeVenda = property.getValorDeVenda();
         this.judicializacao = property.getJudicializacao();
         this.longetude = property.getLongetude();
         this.latitude = property.getLatitude();
