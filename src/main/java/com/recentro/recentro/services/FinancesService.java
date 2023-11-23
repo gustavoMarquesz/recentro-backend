@@ -1,6 +1,7 @@
 package com.recentro.recentro.services;
 import com.recentro.recentro.models.finances.Finances;
-import com.recentro.recentro.models.finances.FinancesDTO;
+import com.recentro.recentro.models.finances.FinancesRequestDTO;
+import com.recentro.recentro.models.finances.FinancesResponseDTO;
 import com.recentro.recentro.repository.FinancasRepository;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FinancesService {
@@ -15,10 +17,11 @@ public class FinancesService {
     @Autowired
     FinancasRepository financasRepository;
 
-    public Finances saveFinance(FinancesDTO financesParam) {
-        Finances finances = new Finances(financesParam);
-        financasRepository.save(finances);
-        return finances;
+    @Transactional
+    public Finances saveFinance(FinancesRequestDTO financesParam) {
+        Finances finance = new Finances(financesParam);
+
+        return financasRepository.save(finance);
     }
 
     public void deleteFinance(Long id) {
@@ -27,18 +30,34 @@ public class FinancesService {
         return;
     }
 
-    public List<FinancesDTO> findAll() {
-
+    public List<FinancesResponseDTO> findAll() {
         List<Finances> financesList = financasRepository.findAll();
-        List<FinancesDTO> finances = financesList.stream().map(currentFinance -> new FinancesDTO(currentFinance)).collect(Collectors.toList());
+        List<FinancesResponseDTO> finances = financesList.stream().map(currentFinance -> new FinancesResponseDTO(
+                currentFinance.getDsqfl(),
+                currentFinance.getNumero(),
+                currentFinance.getRua(),
+                currentFinance.getDsq(),
+                currentFinance.getTipoEmpreendimento(),
+                currentFinance.getAreaTotal(),
+                currentFinance.getBairro()
+        )).collect(Collectors.toList());
+
         return finances;
     }
 
-    public Optional<FinancesDTO> findById(Long id) throws Exception {
-        Optional<Finances> optionalFinance = financasRepository.findById(id);
+    public Optional<FinancesResponseDTO> findById(Long id) throws Exception {
+        Optional<Finances> finance = financasRepository.findById(id);
 
-        if (optionalFinance.isPresent()) {
-            return Optional.of(new FinancesDTO(optionalFinance.get()));
+        if (finance.isPresent()) {
+            return Optional.of(new FinancesResponseDTO(
+                    finance.get().getDsqfl(),
+                    finance.get().getNumero(),
+                    finance.get().getRua(),
+                    finance.get().getDsq(),
+                    finance.get().getTipoEmpreendimento(),
+                    finance.get().getAreaTotal(),
+                    finance.get().getBairro()
+            ));
         }
 
         throw new Exception();

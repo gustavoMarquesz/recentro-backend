@@ -1,6 +1,7 @@
 package com.recentro.recentro.services;
 import com.recentro.recentro.models.licensing.Licensing;
-import com.recentro.recentro.models.licensing.LicensingDTO;
+import com.recentro.recentro.models.licensing.LicensingRequestDTO;
+import com.recentro.recentro.models.licensing.LicensingResponseDTO;
 import com.recentro.recentro.repository.LicenciamentoRepository;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LicensingService {
@@ -16,10 +18,11 @@ public class LicensingService {
     @Autowired
     LicenciamentoRepository licenciamentoRepository;
 
-    public void saveLicensing(LicensingDTO licensingParam) {
+    @Transactional
+    public Licensing saveLicensing(LicensingRequestDTO licensingParam) {
         Licensing licensing = new Licensing(licensingParam);
-        licenciamentoRepository.save(licensing);
-        return ;
+
+        return licenciamentoRepository.save(licensing);
     }
 
     public void deleteLicensing(Long id) {
@@ -28,17 +31,27 @@ public class LicensingService {
         return ;
     }
 
-    public List<LicensingDTO> findAll() {
+    public List<LicensingResponseDTO> findAll() {
         List<Licensing> licensings = licenciamentoRepository.findAll();
-        List<LicensingDTO> licensingDTO = licensings.stream().map(licensing -> new LicensingDTO(licensing)).collect(Collectors.toList());
-        return licensingDTO;
+        List<LicensingResponseDTO> licensingResponseDTO = licensings.stream().map(licensing -> new LicensingResponseDTO(
+                licensing.getNuProcesso(),
+                licensing.getNuLicenca(),
+                licensing.getProcessoAberto2018()
+        )).collect(Collectors.toList());
+
+        return licensingResponseDTO;
     }
 
-    public Optional<LicensingDTO> findById(Long id) throws Exception {
+    public Optional<LicensingResponseDTO> findById(Long id) throws Exception {
         Optional<Licensing> licensing = licenciamentoRepository.findById(id);
 
         if (licensing.isPresent()) {
-            Optional<LicensingDTO> licensingDTO = licensing.map(currentLicensing -> new LicensingDTO(currentLicensing));
+            Optional<LicensingResponseDTO> licensingDTO = licensing.map(currentLicensing -> new LicensingResponseDTO(
+                    currentLicensing.getNuProcesso(),
+                    currentLicensing.getNuLicenca(),
+                    currentLicensing.getProcessoAberto2018()
+            ));
+
             return licensingDTO;
         }
 

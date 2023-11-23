@@ -1,12 +1,13 @@
 package com.recentro.recentro.services;
 import com.recentro.recentro.models.lot.Lot;
-import com.recentro.recentro.models.lot.LotDTO;
+import com.recentro.recentro.models.lot.LotRequestDTO;
 import com.recentro.recentro.repository.LoteRepository;
 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LotService {
@@ -14,10 +15,11 @@ public class LotService {
     @Autowired
     LoteRepository loteRepository;
 
-    public void saveLot(LotDTO lotParam) {
+    @Transactional
+    public Lot saveLot(LotRequestDTO lotParam) {
         Lot lot = new Lot(lotParam);
-        loteRepository.save(lot);
-        return ;
+
+        return loteRepository.save(lot);
     }
 
     public void deleteLot(Long id) {
@@ -51,7 +53,7 @@ public class LotService {
             updatedLote.setQualInvestimento(lote.getQualInvestimento());
             updatedLote.setPichacao(lote.getPichacao());
             updatedLote.setObsevacao(lote.getObsevacao());
-            updatedLote.setAtividadeDeFuncionament(lote.getAtividadeDeFuncionament());
+            updatedLote.setAtividadeDeFuncionamento(lote.getAtividadeDeFuncionamento());
             updatedLote.setAcessibilidade(lote.getAcessibilidade());
             updatedLote.setLaudo(lote.getLaudo());
             updatedLote.setNumeroPavimentoEmUso(lote.getNumeroPavimentoEmUso());
