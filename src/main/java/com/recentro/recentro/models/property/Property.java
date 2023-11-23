@@ -66,6 +66,12 @@ public class Property {
         this.usoDoImovel = property.getUsoDoImovel();
     }
 
+    public Property(String latitude, String longetude){
+        this.latitude = latitude;
+        this.longetude = longetude;
+
+    }
+
     public Property(
         String endereco,
         String contatoProprietario,
@@ -96,5 +102,13 @@ public class Property {
         this.latitude = latitude;
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
+    }
+
+    public String getLongetude() {
+        return longetude;
+    }
+
+    public String getLatitude() {
+        return latitude;
     }
 }

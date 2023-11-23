@@ -15,4 +15,5 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
             "WHERE UPPER(address.endereco) LIKE UPPER(CONCAT('%', :address, '%'))"
     )
     List<Property> getPropertyByAddress(@Param("address") String address);
+
 }

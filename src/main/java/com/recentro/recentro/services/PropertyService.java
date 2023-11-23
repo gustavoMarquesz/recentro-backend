@@ -1,6 +1,7 @@
 package com.recentro.recentro.services;
 
 import com.recentro.recentro.exceptions.ExistingEmail;
+import com.recentro.recentro.models.property.LocationDTO;
 import com.recentro.recentro.models.property.Property;
 import com.recentro.recentro.models.property.PropertyRequestDTO;
 import com.recentro.recentro.models.property.PropertyResponseDTO;
@@ -104,6 +105,18 @@ public class PropertyService {
         ).collect(Collectors.toList()));
 
         return properties;
+    }
+
+
+    public List<LocationDTO> getAllPropertyLocations() {
+        List<Property> properties = propertyRepository.findAll();
+        List<LocationDTO> propertyLocations = new ArrayList<>();
+
+        for (Property property : properties) {
+            propertyLocations.add(new LocationDTO(property.getLatitude(), property.getLongetude()));
+        }
+
+        return propertyLocations;
     }
 
     public Property updateProperty(Long id, PropertyRequestDTO propertyParam) throws Exception {

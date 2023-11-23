@@ -5,6 +5,7 @@ import com.recentro.recentro.models.*;
 import com.recentro.recentro.models.finances.Finances;
 import com.recentro.recentro.models.licensing.Licensing;
 import com.recentro.recentro.models.lot.Lot;
+import com.recentro.recentro.models.property.LocationDTO;
 import com.recentro.recentro.models.property.Property;
 import com.recentro.recentro.models.property.PropertyResponseDTO;
 import com.recentro.recentro.services.FinancesService;
@@ -78,6 +79,13 @@ public class ImovelController {
         licensingService.deleteLicensing(id);
         return ResponseEntity.status(HttpStatus.OK).body("Imovel deleted successfully.");
     }
+
+    @GetMapping("/locations")
+    public ResponseEntity<List<LocationDTO>> getAllPropertyLocations() {
+        List<LocationDTO> propertyLocations = propertyService.getAllPropertyLocations();
+        return new ResponseEntity<>(propertyLocations, HttpStatus.OK);
+    }
+
 
 //    @PutMapping("/{id}")
 //    public ResponseEntity<Object> updatePropriedade(@PathVariable(value="id") Long id,
