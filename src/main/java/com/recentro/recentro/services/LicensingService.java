@@ -1,13 +1,7 @@
 package com.recentro.recentro.services;
 import com.recentro.recentro.models.licensing.Licensing;
-<<<<<<< HEAD
 import com.recentro.recentro.models.licensing.LicensingRequestDTO;
 import com.recentro.recentro.models.licensing.LicensingResponseDTO;
-=======
-import com.recentro.recentro.models.licensing.LicensingDTO;
-import com.recentro.recentro.models.lot.Lot;
-import com.recentro.recentro.models.lot.LotDTO;
->>>>>>> feature/11-crud-propriedade
 import com.recentro.recentro.repository.LicenciamentoRepository;
 
 import java.util.List;
@@ -66,7 +60,7 @@ public class LicensingService {
     }
 
 
-    public Licensing updateLicensing(Long id, LicensingDTO licensingParam) throws Exception {
+    public Licensing updateLicensing(Long id, LicensingRequestDTO licensingParam) throws Exception {
         Optional<Licensing> existingLicensing = licenciamentoRepository.findById(id);
 
         if (existingLicensing.isPresent()) {
