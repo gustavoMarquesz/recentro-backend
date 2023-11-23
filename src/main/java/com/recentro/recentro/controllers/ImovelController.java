@@ -2,7 +2,11 @@ package com.recentro.recentro.controllers;
 
 import com.recentro.recentro.exceptions.ExistingEmail;
 import com.recentro.recentro.models.*;
-import com.recentro.recentro.models.property.PropertyDTO;
+import com.recentro.recentro.models.finances.Finances;
+import com.recentro.recentro.models.licensing.Licensing;
+import com.recentro.recentro.models.lot.Lot;
+import com.recentro.recentro.models.property.Property;
+import com.recentro.recentro.models.property.PropertyResponseDTO;
 import com.recentro.recentro.services.FinancesService;
 import com.recentro.recentro.services.PropertyService;
 import com.recentro.recentro.services.LicensingService;
@@ -12,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,11 +36,18 @@ public class ImovelController {
     LicensingService licensingService;
 
     @PostMapping("/register")
-    public ResponseEntity<Void> save(@RequestBody PropertyInformation property) {
-        financesService.saveFinance(property.getFinances());
-        lotService.saveLot(property.getLot());
-        licensingService.saveLicensing(property.getLicensing());
-        propertyService.saveProperty(property.getProperty());
+    public ResponseEntity<Void> save(@RequestBody PropertyInformation propertyInformation) {
+        Finances finance = financesService.saveFinance(propertyInformation.getFinances());
+        Lot lot = lotService.saveLot(propertyInformation.getLot());
+        Licensing licensing = licensingService.saveLicensing(propertyInformation.getLicensing());
+
+        Property propertyToBePersisted = new Property(propertyInformation.getProperty());
+        propertyToBePersisted.setFinances(finance);
+        propertyToBePersisted.setLicensing(licensing);
+        propertyToBePersisted.setLot(lot);
+
+        propertyService.saveProperty(propertyToBePersisted);
+
         return ResponseEntity.ok().build();
     }
 
@@ -51,20 +61,13 @@ public class ImovelController {
         return ResponseEntity.ok().body(responseBody);
     }
 
-    @GetMapping("/list")
-    public List<?> listarPropriedades (
-            @RequestParam(name = "address", defaultValue = "") String address
+    @PostMapping("/search")
+    public ResponseEntity<List<PropertyResponseDTO>> listarPropriedades (
+            @RequestBody String address
     ) throws Exception {
+        List <PropertyResponseDTO> properties = propertyService.listProperties(address);
 
-        List<Object> propriedades = new ArrayList<>();
-
-        List <PropertyDTO> properties = propertyService.listProperties(address);
-
-        for (PropertyDTO property : properties) {
-            propriedades.add(property);
-        }
-
-        return propriedades;
+        return ResponseEntity.status(HttpStatus.OK).body(properties);
     }
 
     @DeleteMapping("/{id}")
