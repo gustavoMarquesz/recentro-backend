@@ -1,6 +1,7 @@
 package com.recentro.recentro.models.lot;
 
 import com.recentro.recentro.models.PropertyInformation;
+import com.recentro.recentro.models.property.Property;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class Lot {
     private String investimento;
     private String pichacao;
     private String obsevacao;
-    private String atividadeDeFuncionament;
+    private String atividadeDeFuncionamento;
     private String acessibilidade;
     private String laudo;
     private String numeroPavimentoEmUso;
@@ -33,26 +34,10 @@ public class Lot {
     private String situacao;
     private String disponibilidade;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "lot")
+    private Property property;
 
-    public Lot(PropertyInformation property) {
-        this.nomeEdificil = property.getLot().getNomeEdificil();
-        this.autorizacaoDeInformacao = property.getLot().getAutorizacaoDeInformacao();
-        this.tributacao = property.getLot().getTributacao();
-        this.proprietarioLocalizado = property.getLot().getProprietarioLocalizado();
-        this.restauranteCafes = property.getLot().getRestauranteCafes();
-        this.qualInvestimento = property.getLot().getQualInvestimento();
-        this.pichacao = property.getLot().getPichacao();
-        this.obsevacao = property.getLot().getObsevacao();
-        this.atividadeDeFuncionament = property.getLot().getAtividadeDeFuncionament();
-        this.acessibilidade = property.getLot().getAcessibilidade();
-        this.laudo = property.getLot().getLaudo();
-        this.numeroPavimentoEmUso = property.getLot().getNumeroPavimentoEmUso();
-        this.grauDeRisco = property.getLot().getNumeroPavimentoEmUso();
-        this.situacao = property.getLot().getSituacao();
-        this.disponibilidade = property.getLot().getDisponibilidade();
-    }
-
-    public Lot(LotDTO property) {
+    public Lot(LotRequestDTO property) {
         this.nomeEdificil = property.getNomeEdificil();
         this.autorizacaoDeInformacao = property.getAutorizacaoDeInformacao();
         this.tributacao = property.getTributacao();
@@ -61,7 +46,7 @@ public class Lot {
         this.qualInvestimento = property.getQualInvestimento();
         this.pichacao = property.getPichacao();
         this.obsevacao = property.getObsevacao();
-        this.atividadeDeFuncionament = property.getAtividadeDeFuncionament();
+        this.atividadeDeFuncionamento = property.getAtividadeDeFuncionamento();
         this.acessibilidade = property.getAcessibilidade();
         this.laudo = property.getLaudo();
         this.numeroPavimentoEmUso = property.getNumeroPavimentoEmUso();

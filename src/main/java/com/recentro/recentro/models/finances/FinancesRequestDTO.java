@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class FinancesDTO {
+public class FinancesRequestDTO {
 
     public String dsqfl;
     private String numero;
@@ -16,7 +16,7 @@ public class FinancesDTO {
     private String areaTotal;
     private String bairro;
 
-    public FinancesDTO(PropertyInformation property) {
+    public FinancesRequestDTO(PropertyInformation property) {
         this.dsqfl = property.getFinances().getDsqfl();
         this.numero = property.getFinances().getNumero();
         this.rua = property.getFinances().getRua();
@@ -24,15 +24,5 @@ public class FinancesDTO {
         this.tipoEmpreendimento = property.getFinances().getTipoEmpreendimento();
         this.areaTotal = property.getFinances().getAreaTotal();
         this.bairro = property.getFinances().getBairro();
-    }
-
-    public FinancesDTO(Finances property) {
-        this.dsqfl = property.getDsqfl();
-        this.numero = property.getNumero();
-        this.rua = property.getRua();
-        this.dsq = property.getDsq();
-        this.tipoEmpreendimento = property.getTipoEmpreendimento();
-        this.areaTotal = property.getAreaTotal();
-        this.bairro = property.getBairro();
     }
 }

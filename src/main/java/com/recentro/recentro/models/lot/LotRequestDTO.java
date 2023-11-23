@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class LotDTO {
+public class LotRequestDTO {
 
     private String nomeEdificil;
     private String autorizacaoDeInformacao;
@@ -17,7 +17,7 @@ public class LotDTO {
     private String investimento;
     private String pichacao;
     private String obsevacao;
-    private String atividadeDeFuncionament;
+    private String atividadeDeFuncionamento;
     private String acessibilidade;
     private String laudo;
     private String numeroPavimentoEmUso;
@@ -25,7 +25,7 @@ public class LotDTO {
     private String situacao;
     private String disponibilidade;
 
-    public LotDTO(PropertyInformation property) {
+    public LotRequestDTO(PropertyInformation property) {
         this.nomeEdificil = property.getLot().getNomeEdificil();
         this.autorizacaoDeInformacao = property.getLot().getAutorizacaoDeInformacao();
         this.tributacao = property.getLot().getTributacao();
@@ -34,30 +34,12 @@ public class LotDTO {
         this.qualInvestimento = property.getLot().getQualInvestimento();
         this.pichacao = property.getLot().getPichacao();
         this.obsevacao = property.getLot().getObsevacao();
-        this.atividadeDeFuncionament = property.getLot().getAtividadeDeFuncionament();
+        this.atividadeDeFuncionamento = property.getLot().getAtividadeDeFuncionamento();
         this.acessibilidade = property.getLot().getAcessibilidade();
         this.laudo = property.getLot().getLaudo();
         this.numeroPavimentoEmUso = property.getLot().getNumeroPavimentoEmUso();
         this.grauDeRisco = property.getLot().getNumeroPavimentoEmUso();
         this.situacao = property.getLot().getSituacao();
         this.disponibilidade = property.getLot().getDisponibilidade();
-    }
-
-    public LotDTO(Lot property) {
-        this.nomeEdificil = property.getNomeEdificil();
-        this.autorizacaoDeInformacao = property.getAutorizacaoDeInformacao();
-        this.tributacao = property.getTributacao();
-        this.proprietarioLocalizado = property.getProprietarioLocalizado();
-        this.restauranteCafes = property.getRestauranteCafes();
-        this.qualInvestimento = property.getQualInvestimento();
-        this.pichacao = property.getPichacao();
-        this.obsevacao = property.getObsevacao();
-        this.atividadeDeFuncionament = property.getAtividadeDeFuncionament();
-        this.acessibilidade = property.getAcessibilidade();
-        this.laudo = property.getLaudo();
-        this.numeroPavimentoEmUso = property.getNumeroPavimentoEmUso();
-        this.grauDeRisco = property.getNumeroPavimentoEmUso();
-        this.situacao = property.getSituacao();
-        this.disponibilidade = property.getDisponibilidade();
     }
 }

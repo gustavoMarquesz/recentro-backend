@@ -1,6 +1,9 @@
 package com.recentro.recentro.models.property;
 
 import com.recentro.recentro.models.PropertyInformation;
+import com.recentro.recentro.models.finances.Finances;
+import com.recentro.recentro.models.licensing.Licensing;
+import com.recentro.recentro.models.lot.Lot;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,24 +36,18 @@ public class Property {
     private String plantaRegional;
     private String usoDoImovel;
 
-    public Property(PropertyInformation property) {
-        this.endereco = property.getProperty().getEndereco();
-        this.contatoProprietario = property.getProperty().getContatoProprietario();
-        this.proprietarioCartorio = property.getProperty().getProprietarioCartorio();
-        this.observacao = property.getProperty().getObservacao();
-        this.descricaoJudicializacao = property.getProperty().getJudicializacao();
-        this.proprietarioCampo = property.getProperty().getProprietarioCampo();
-        this.planta = property.getProperty().getPlanta();
-        this.rgi = property.getProperty().getRgi();
-        this.valorDoAluguel = property.getProperty().getValorDoAluguel();
-        this.judicializacao = property.getProperty().getJudicializacao();
-        this.longetude = property.getProperty().getLongetude();
-        this.latitude = property.getProperty().getLatitude();
-        this.plantaRegional = property.getProperty().getPlantaRegional();
-        this.usoDoImovel = property.getProperty().getUsoDoImovel();
-    }
+    @OneToOne
+    @JoinColumn(name = "finances_id")
+    private Finances finances;
 
-    public Property(PropertyDTO property) {
+    @OneToOne
+    @JoinColumn(name = "licensing_id")
+    private Licensing licensing;
+
+    @OneToOne
+    @JoinColumn(name = "lot_id")
+    private Lot lot;
+    public Property(PropertyRequestDTO property) {
         this.endereco = property.getEndereco();
         this.contatoProprietario = property.getContatoProprietario();
         this.proprietarioCartorio = property.getProprietarioCartorio();
@@ -65,5 +62,37 @@ public class Property {
         this.latitude = property.getLatitude();
         this.plantaRegional = property.getPlantaRegional();
         this.usoDoImovel = property.getUsoDoImovel();
+    }
+
+    public Property(
+        String endereco,
+        String contatoProprietario,
+        String proprietarioCartorio,
+        String observacao,
+        String descricaoJudicializacao,
+        String proprietarioCampo,
+        String planta,
+        String rgi,
+        String valorDoAluguel,
+        String judicializacao,
+        String longetude,
+        String latitude,
+        String plantaRegional,
+        String usoDoImovel
+    ) {
+        this.endereco = endereco;
+        this.contatoProprietario = contatoProprietario;
+        this.proprietarioCartorio = proprietarioCartorio;
+        this.observacao = observacao;
+        this.descricaoJudicializacao = descricaoJudicializacao;
+        this.proprietarioCampo = proprietarioCampo;
+        this.planta = planta;
+        this.rgi = rgi;
+        this.valorDoAluguel = valorDoAluguel;
+        this.judicializacao = judicializacao;
+        this.longetude = longetude;
+        this.latitude = latitude;
+        this.plantaRegional = plantaRegional;
+        this.usoDoImovel = usoDoImovel;
     }
 }

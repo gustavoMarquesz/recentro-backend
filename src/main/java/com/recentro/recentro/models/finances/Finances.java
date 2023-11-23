@@ -1,6 +1,7 @@
 package com.recentro.recentro.models.finances;
 
 import com.recentro.recentro.models.PropertyInformation;
+import com.recentro.recentro.models.property.Property;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,17 +26,10 @@ public class Finances {
     private String areaTotal;
     private String bairro;
 
-    public Finances(PropertyInformation property) {
-        this.dsqfl = property.getFinances().getDsqfl();
-        this.numero = property.getFinances().getNumero();
-        this.rua = property.getFinances().getRua();
-        this.dsq = property.getFinances().getDsq();
-        this.tipoEmpreendimento = property.getFinances().getTipoEmpreendimento();
-        this.areaTotal = property.getFinances().getAreaTotal();
-        this.bairro = property.getFinances().getBairro();
-    }
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "finances")
+    private Property property;
 
-    public Finances(FinancesDTO property) {
+    public Finances(FinancesRequestDTO property) {
         this.dsqfl = property.getDsqfl();
         this.numero = property.getNumero();
         this.rua = property.getRua();

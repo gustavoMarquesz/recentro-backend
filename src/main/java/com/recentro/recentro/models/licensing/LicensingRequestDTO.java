@@ -6,21 +6,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class LicensingDTO {
+public class LicensingRequestDTO {
 
     private String nuProcesso;
     private String nuLicenca;
     private String ProcessoAberto2018;
 
-    public LicensingDTO(PropertyInformation property) {
+    public LicensingRequestDTO(PropertyInformation property) {
         this.nuProcesso = property.getLicensing().getNuProcesso();
         this.nuLicenca = property.getLicensing().getNuLicenca();
         this.ProcessoAberto2018 = property.getLicensing().getProcessoAberto2018();
-    }
-
-    public LicensingDTO(Licensing property) {
-        this.nuProcesso = property.getNuProcesso();
-        this.nuLicenca = property.getNuLicenca();
-        this.ProcessoAberto2018 = property.getProcessoAberto2018();
     }
 }
