@@ -6,27 +6,27 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LocationDTO {
 
-    private String longetude;
-    private String latitude;
+    private Double longitude;
+    private Double latitude;
 
-    public LocationDTO(String longetude, String latitude){
-        this.longetude = longetude;
+    public LocationDTO(Double longitude, Double latitude){
+        this.longitude = longitude;
         this.latitude= latitude;
     }
 
-    public String getLongetude() {
-        return longetude;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLongetude(String longetude) {
-        this.longetude = longetude;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 }

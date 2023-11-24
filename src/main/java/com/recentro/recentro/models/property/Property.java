@@ -31,8 +31,8 @@ public class Property {
     private String valorDoAluguel;
     private String valorDeVenda;
     private String judicializacao;
-    private String longetude;
-    private String latitude;
+    private Double longitude;
+    private Double latitude;
     private String plantaRegional;
     private String usoDoImovel;
 
@@ -47,6 +47,7 @@ public class Property {
     @OneToOne
     @JoinColumn(name = "lot_id")
     private Lot lot;
+
     public Property(PropertyRequestDTO property) {
         this.endereco = property.getEndereco();
         this.contatoProprietario = property.getContatoProprietario();
@@ -60,33 +61,32 @@ public class Property {
         this.valorDoAluguel = property.getValorDoAluguel();
         this.valorDeVenda = property.getValorDeVenda();
         this.judicializacao = property.getJudicializacao();
-        this.longetude = property.getLongetude();
+        this.longitude = property.getLongitude();
         this.latitude = property.getLatitude();
         this.plantaRegional = property.getPlantaRegional();
         this.usoDoImovel = property.getUsoDoImovel();
     }
 
-    public Property(String latitude, String longetude){
+    public Property(Double latitude, Double longitude){
         this.latitude = latitude;
-        this.longetude = longetude;
-
+        this.longitude = longitude;
     }
 
     public Property(
-        String endereco,
-        String contatoProprietario,
-        String proprietarioCartorio,
-        String observacao,
-        String descricaoJudicializacao,
-        String proprietarioCampo,
-        String planta,
-        String rgi,
-        String valorDoAluguel,
-        String judicializacao,
-        String longetude,
-        String latitude,
-        String plantaRegional,
-        String usoDoImovel
+            String endereco,
+            String contatoProprietario,
+            String proprietarioCartorio,
+            String observacao,
+            String descricaoJudicializacao,
+            String proprietarioCampo,
+            String planta,
+            String rgi,
+            String valorDoAluguel,
+            String judicializacao,
+            Double longitude,
+            Double latitude,
+            String plantaRegional,
+            String usoDoImovel
     ) {
         this.endereco = endereco;
         this.contatoProprietario = contatoProprietario;
@@ -98,17 +98,10 @@ public class Property {
         this.rgi = rgi;
         this.valorDoAluguel = valorDoAluguel;
         this.judicializacao = judicializacao;
-        this.longetude = longetude;
+        this.longitude = longitude;
         this.latitude = latitude;
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
     }
 
-    public String getLongetude() {
-        return longetude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
 }

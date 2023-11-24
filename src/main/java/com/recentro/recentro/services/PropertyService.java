@@ -45,7 +45,7 @@ public class PropertyService {
                     property.get().getRgi(),
                     property.get().getValorDoAluguel(),
                     property.get().getJudicializacao(),
-                    property.get().getLongetude(),
+                    property.get().getLongitude(),
                     property.get().getLatitude(),
                     property.get().getPlantaRegional(),
                     property.get().getUsoDoImovel()
@@ -71,7 +71,7 @@ public class PropertyService {
                         propertyData.getRgi(),
                         propertyData.getValorDoAluguel(),
                         propertyData.getJudicializacao(),
-                        propertyData.getLongetude(),
+                        propertyData.getLongitude(),
                         propertyData.getLatitude(),
                         propertyData.getPlantaRegional(),
                         propertyData.getUsoDoImovel(),
@@ -113,7 +113,7 @@ public class PropertyService {
         List<LocationDTO> propertyLocations = new ArrayList<>();
 
         for (Property property : properties) {
-            propertyLocations.add(new LocationDTO(property.getLatitude(), property.getLongetude()));
+            propertyLocations.add(new LocationDTO(property.getLatitude(), property.getLongitude()));
         }
 
         return propertyLocations;

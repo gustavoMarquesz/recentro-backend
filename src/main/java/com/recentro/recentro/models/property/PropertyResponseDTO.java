@@ -12,8 +12,8 @@ public class PropertyResponseDTO {
     public String rgi;
     public String valorDoAluguel;
     public String judicializacao;
-    public String longetude;
-    public String latitude;
+    public Double longitude;
+    public Double latitude;
     public String plantaRegional;
     public String usoDoImovel;
     public String dsqfl;
@@ -55,8 +55,8 @@ public class PropertyResponseDTO {
         String rgi,
         String valorDoAluguel,
         String judicializacao,
-        String longetude,
-        String latitude,
+        Double longitude,
+        Double latitude,
         String plantaRegional,
         String usoDoImovel,
         String dsqfl,
@@ -97,7 +97,7 @@ public class PropertyResponseDTO {
         this.rgi = rgi;
         this.valorDoAluguel = valorDoAluguel;
         this.judicializacao = judicializacao;
-        this.longetude = longetude;
+        this.longitude = longitude;
         this.latitude = latitude;
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
@@ -147,8 +147,8 @@ public class PropertyResponseDTO {
             String rgi,
             String valorDoAluguel,
             String judicializacao,
-            String longetude,
-            String latitude,
+            Double longitude,
+            Double latitude,
             String plantaRegional,
             String usoDoImovel
     ) {
@@ -162,7 +162,7 @@ public class PropertyResponseDTO {
         this.rgi = rgi;
         this.valorDoAluguel = valorDoAluguel;
         this.judicializacao = judicializacao;
-        this.longetude = longetude;
+        this.longitude = longitude;
         this.latitude = latitude;
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
