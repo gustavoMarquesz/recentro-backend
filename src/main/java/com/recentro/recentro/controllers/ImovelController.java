@@ -6,6 +6,7 @@ import com.recentro.recentro.models.finances.Finances;
 import com.recentro.recentro.models.licensing.Licensing;
 import com.recentro.recentro.models.lot.Lot;
 import com.recentro.recentro.models.property.Property;
+import com.recentro.recentro.models.property.PropertyRequestDTO;
 import com.recentro.recentro.models.property.PropertyResponseDTO;
 import com.recentro.recentro.services.FinancesService;
 import com.recentro.recentro.services.PropertyService;
@@ -62,10 +63,23 @@ public class ImovelController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<List<PropertyResponseDTO>> listarPropriedades (
+    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToUser (
+            @RequestBody PropertyRequestDTO search
+    ) throws Exception {
+        System.out.println(search);
+        List <PropertyResponseDTO> properties = propertyService.listPropertiesWithFilteredData(
+                search.getEndereco(),
+                search.getNeighborhood()
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(properties);
+    }
+
+    @PostMapping("/admin/search")
+    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToAdmin (
             @RequestBody String address
     ) throws Exception {
-        List <PropertyResponseDTO> properties = propertyService.listProperties(address);
+        List <PropertyResponseDTO> properties = propertyService.listPropertiesToAdmin(address);
 
         return ResponseEntity.status(HttpStatus.OK).body(properties);
     }

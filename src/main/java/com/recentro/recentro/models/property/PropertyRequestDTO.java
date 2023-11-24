@@ -8,22 +8,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PropertyRequestDTO {
 
-    private String endereco;
-    private String contatoProprietario;
-    private String proprietarioCartorio;
-    private String coincidenciaProprietario;
-    private String observacao;
-    private String descricaoJudicializacao;
-    private String proprietarioCampo;
-    private String planta;
-    private String rgi;
-    private String valorDoAluguel;
-    private String valorDeVenda;
-    private String judicializacao;
-    private String longetude;
-    private String latitude;
-    private String plantaRegional;
-    private String usoDoImovel;
+    String endereco;
+    String contatoProprietario;
+    String proprietarioCartorio;
+    String coincidenciaProprietario;
+    String observacao;
+    String descricaoJudicializacao;
+    String proprietarioCampo;
+    String planta;
+    String rgi;
+    String valorDoAluguel;
+    String valorDeVenda;
+    String judicializacao;
+    String longetude;
+    String latitude;
+    String plantaRegional;
+    String usoDoImovel;
+    String neighborhood;
 
     public PropertyRequestDTO(PropertyInformation property) {
         this.endereco = property.getProperty().getEndereco();
@@ -42,5 +43,13 @@ public class PropertyRequestDTO {
         this.latitude = property.getProperty().getLatitude();
         this.plantaRegional = property.getProperty().getPlantaRegional();
         this.usoDoImovel = property.getProperty().getUsoDoImovel();
+    }
+
+    public PropertyRequestDTO(
+        String endereco,
+        String neighborhood
+    ) {
+        this.endereco = endereco;
+        this.neighborhood = neighborhood;
     }
 }

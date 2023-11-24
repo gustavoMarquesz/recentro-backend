@@ -54,8 +54,8 @@ public class PropertyService {
         throw new ExistingEmail();
     }
 
-    public List<PropertyResponseDTO> listProperties(String address) {
-        List<Property> propertiesFromRepository = propertyRepository.getPropertyByAddress(address);
+    public List<PropertyResponseDTO> listPropertiesToAdmin(String address) {
+        List<Property> propertiesFromRepository = propertyRepository.getAllPropertyData(address);
 
         List<PropertyResponseDTO> properties = new ArrayList<PropertyResponseDTO>();
         properties.addAll(propertiesFromRepository.stream().map(
@@ -100,6 +100,24 @@ public class PropertyService {
                         propertyData.getLicensing().getNuProcesso(),
                         propertyData.getLicensing().getNuLicenca(),
                         propertyData.getLicensing().getProcessoAberto2018()
+                )
+        ).collect(Collectors.toList()));
+
+        return properties;
+    }
+
+    public List<PropertyResponseDTO> listPropertiesWithFilteredData(String address, String neighborhood) {
+        List<PropertyResponseDTO> propertiesFromRepository = propertyRepository.getPropertyDataByNameOrNeighborhood(
+                address, neighborhood
+        );
+
+        List<PropertyResponseDTO> properties = new ArrayList<PropertyResponseDTO>();
+        properties.addAll(propertiesFromRepository.stream().map(
+                propertyData -> new PropertyResponseDTO (
+                        propertyData.endereco,
+                        propertyData.contatoProprietario,
+                        propertyData.longetude,
+                        propertyData.latitude
                 )
         ).collect(Collectors.toList()));
 

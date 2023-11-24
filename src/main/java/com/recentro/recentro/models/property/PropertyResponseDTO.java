@@ -1,5 +1,8 @@
 package com.recentro.recentro.models.property;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PropertyResponseDTO {
 
     public String endereco;
@@ -166,5 +169,17 @@ public class PropertyResponseDTO {
         this.latitude = latitude;
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
+    }
+
+    public PropertyResponseDTO(
+            String endereco,
+            String contatoProprietario,
+            String longetude,
+            String latitude
+    ) {
+        this.endereco = endereco;
+        this.contatoProprietario = contatoProprietario;
+        this.longetude = longetude;
+        this.latitude = latitude;
     }
 }
