@@ -18,9 +18,10 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> getAllPropertyData(@Param("address") String address);
 
     @Query("SELECT new com.recentro.recentro.models.property.PropertyResponseDTO( " +
-            "property.endereco, property.contatoProprietario, property.longetude, property.latitude " + ") " +
+            "property.endereco, property.contatoProprietario, property.longetude, property.latitude, lot.nomeEdificil" + ") " +
             "FROM Property property " +
             "INNER JOIN property.finances finances " +
+            "INNER JOIN property.lot lot " +
             "WHERE UPPER(property.endereco) LIKE UPPER(CONCAT('%', :address, '%')) " +
             "OR UPPER(finances.bairro) LIKE UPPER(CONCAT('%', :neighborhood, '%'))"
     )

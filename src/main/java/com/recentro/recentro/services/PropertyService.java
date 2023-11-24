@@ -117,7 +117,8 @@ public class PropertyService {
                         propertyData.endereco,
                         propertyData.contatoProprietario,
                         propertyData.longetude,
-                        propertyData.latitude
+                        propertyData.latitude,
+                        propertyData.nomeEdificil
                 )
         ).collect(Collectors.toList()));
 
