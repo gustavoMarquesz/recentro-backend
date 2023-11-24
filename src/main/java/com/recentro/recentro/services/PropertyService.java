@@ -114,11 +114,10 @@ public class PropertyService {
         List<PropertyResponseDTO> properties = new ArrayList<PropertyResponseDTO>();
         properties.addAll(propertiesFromRepository.stream().map(
                 propertyData -> new PropertyResponseDTO (
-                        propertyData.endereco,
-                        propertyData.contatoProprietario,
+                        propertyData.nomeEdificil,
+                        propertyData.disponibilidade,
                         propertyData.longetude,
-                        propertyData.latitude,
-                        propertyData.nomeEdificil
+                        propertyData.latitude
                 )
         ).collect(Collectors.toList()));
 

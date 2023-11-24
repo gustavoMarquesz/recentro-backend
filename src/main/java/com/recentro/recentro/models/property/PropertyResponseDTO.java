@@ -172,16 +172,14 @@ public class PropertyResponseDTO {
     }
 
     public PropertyResponseDTO(
-            String endereco,
-            String contatoProprietario,
+            String nomeEdificil,
+            String disponibilidade,
             String longetude,
-            String latitude,
-            String nomeEdificil
+            String latitude
     ) {
-        this.endereco = endereco;
-        this.contatoProprietario = contatoProprietario;
+        this.nomeEdificil = nomeEdificil;
+        this.disponibilidade = disponibilidade;
         this.longetude = longetude;
         this.latitude = latitude;
-        this.nomeEdificil = nomeEdificil;
     }
 }
