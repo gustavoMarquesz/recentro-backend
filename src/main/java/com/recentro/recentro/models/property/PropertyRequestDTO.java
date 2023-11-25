@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PropertyRequestDTO {
 
+    // Property data
     String endereco;
     String contatoProprietario;
     String proprietarioCartorio;
@@ -25,6 +26,16 @@ public class PropertyRequestDTO {
     String plantaRegional;
     String usoDoImovel;
     String neighborhood;
+
+    // Checkbox possible filter data
+    String available;
+    String occupied;
+    String atConstruction;
+    String abandoned;
+    String cowork;
+    String recifeAntigo;
+    String santoAmaro;
+    String saoJose;
 
     public PropertyRequestDTO(PropertyInformation property) {
         this.endereco = property.getProperty().getEndereco();
@@ -51,5 +62,26 @@ public class PropertyRequestDTO {
     ) {
         this.endereco = endereco;
         this.neighborhood = neighborhood;
+    }
+
+    // To be used when filtering by checkboxes
+    public PropertyRequestDTO (
+        String available,
+        String occupied,
+        String atConstruction,
+        String abandoned,
+        String cowork,
+        String recifeAntigo,
+        String santoAmaro,
+        String saoJose
+    ) {
+        this.available = available;
+        this.occupied = occupied;
+        this.atConstruction = atConstruction;
+        this.abandoned = abandoned;
+        this.cowork = cowork;
+        this.recifeAntigo = recifeAntigo;
+        this.santoAmaro = santoAmaro;
+        this.saoJose = saoJose;
     }
 }

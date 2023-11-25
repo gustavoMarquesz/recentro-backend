@@ -106,6 +106,23 @@ public class PropertyService {
         return properties;
     }
 
+    public List<PropertyResponseDTO> listPropertiesByCheckboxFilterInformation(
+            String available,
+            String occupied,
+            String atConstruction,
+            String abandoned,
+            String cowork,
+            String recifeAntigo,
+            String santoAmaro,
+            String saoJose
+    ) {
+        List<PropertyResponseDTO> propertiesFromRepository = propertyRepository.getPropertiesByFilteringWithCheckboxInformation(
+                        available
+                );
+
+        return propertiesFromRepository;
+    }
+
     public List<PropertyResponseDTO> listPropertiesWithFilteredData(String address, String neighborhood) {
         List<PropertyResponseDTO> propertiesFromRepository = propertyRepository.getPropertyDataByNameOrNeighborhood(
                 address, neighborhood

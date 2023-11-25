@@ -63,13 +63,38 @@ public class ImovelController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToUser (
+    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToUserBySearchBar (
             @RequestBody PropertyRequestDTO search
     ) throws Exception {
         System.out.println(search);
         List <PropertyResponseDTO> properties = propertyService.listPropertiesWithFilteredData(
                 search.getEndereco(),
                 search.getNeighborhood()
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(properties);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesByCheckboxFilter(
+            @RequestParam(required = false) String available,
+            @RequestParam(required = false) String occupied,
+            @RequestParam(required = false) String atConstruction,
+            @RequestParam(required = false) String abandoned,
+            @RequestParam(required = false) String cowork,
+            @RequestParam(required = false) String recifeAntigo,
+            @RequestParam(required = false) String santoAmaro,
+            @RequestParam(required = false) String saoJose
+    ) {
+        List<PropertyResponseDTO> properties = propertyService.listPropertiesByCheckboxFilterInformation(
+                available,
+                occupied,
+                atConstruction,
+                abandoned,
+                cowork,
+                recifeAntigo,
+                santoAmaro,
+                saoJose
         );
 
         return ResponseEntity.status(HttpStatus.OK).body(properties);

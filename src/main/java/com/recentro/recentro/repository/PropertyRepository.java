@@ -22,6 +22,17 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
             "FROM Property property " +
             "INNER JOIN property.finances finances " +
             "INNER JOIN property.lot lot " +
+            "WHERE UPPER(lot.disponibilidade) = UPPER(:available)"
+    )
+    List<PropertyResponseDTO> getPropertiesByFilteringWithCheckboxInformation(
+            @Param("available") String available
+    );
+
+    @Query("SELECT new com.recentro.recentro.models.property.PropertyResponseDTO( " +
+            "property.endereco, lot.disponibilidade, property.longetude, property.latitude " + ") " +
+            "FROM Property property " +
+            "INNER JOIN property.finances finances " +
+            "INNER JOIN property.lot lot " +
             "WHERE UPPER(property.endereco) LIKE UPPER(CONCAT('%', :address, '%')) " +
             "OR UPPER(finances.bairro) LIKE UPPER(CONCAT('%', :neighborhood, '%'))"
     )
