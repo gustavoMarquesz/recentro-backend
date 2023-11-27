@@ -54,8 +54,8 @@ public class PropertyService {
         throw new ExistingEmail();
     }
 
-    public List<PropertyResponseDTO> listPropertiesToAdmin(String address) {
-        List<Property> propertiesFromRepository = propertyRepository.getAllPropertyData(address);
+    public List<PropertyResponseDTO> listPropertiesToAdmin() {
+        List<Property> propertiesFromRepository = propertyRepository.getAllPropertyData();
 
         List<PropertyResponseDTO> properties = new ArrayList<PropertyResponseDTO>();
         properties.addAll(propertiesFromRepository.stream().map(
@@ -117,28 +117,25 @@ public class PropertyService {
             String saoJose
     ) {
         List<PropertyResponseDTO> propertiesFromRepository = propertyRepository.getPropertiesByFilteringWithCheckboxInformation(
-                        available
-                );
+                        available,
+                        occupied,
+                        atConstruction,
+                        abandoned,
+                        cowork,
+                        recifeAntigo,
+                        santoAmaro,
+                        saoJose
+        );
 
         return propertiesFromRepository;
     }
 
-    public List<PropertyResponseDTO> listPropertiesWithFilteredData(String address, String neighborhood) {
-        List<PropertyResponseDTO> propertiesFromRepository = propertyRepository.getPropertyDataByNameOrNeighborhood(
-                address, neighborhood
-        );
+    public List<PropertyResponseDTO> listPropertiesWithFilteredData(String search) {
+        List<PropertyResponseDTO> propertiesFromRepository = propertyRepository.getPropertyDataByNameOrNeighborhood(search);
 
-        List<PropertyResponseDTO> properties = new ArrayList<PropertyResponseDTO>();
-        properties.addAll(propertiesFromRepository.stream().map(
-                propertyData -> new PropertyResponseDTO (
-                        propertyData.nomeEdificil,
-                        propertyData.disponibilidade,
-                        propertyData.longetude,
-                        propertyData.latitude
-                )
-        ).collect(Collectors.toList()));
+        System.out.println(propertiesFromRepository);
 
-        return properties;
+        return propertiesFromRepository;
     }
 
     public Property updateProperty(Long id, PropertyRequestDTO propertyParam) throws Exception {

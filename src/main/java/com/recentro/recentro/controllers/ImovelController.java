@@ -62,29 +62,25 @@ public class ImovelController {
         return ResponseEntity.ok().body(responseBody);
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToUserBySearchBar (
-            @RequestBody PropertyRequestDTO search
+            @RequestParam(required = false) String search
     ) throws Exception {
-        System.out.println(search);
-        List <PropertyResponseDTO> properties = propertyService.listPropertiesWithFilteredData(
-                search.getEndereco(),
-                search.getNeighborhood()
-        );
+        List <PropertyResponseDTO> properties = propertyService.listPropertiesWithFilteredData(search);
 
         return ResponseEntity.status(HttpStatus.OK).body(properties);
     }
 
-    @GetMapping
+    @GetMapping("/checkbox-filter")
     public ResponseEntity<List<PropertyResponseDTO>> listPropertiesByCheckboxFilter(
-            @RequestParam(required = false) String available,
-            @RequestParam(required = false) String occupied,
-            @RequestParam(required = false) String atConstruction,
-            @RequestParam(required = false) String abandoned,
-            @RequestParam(required = false) String cowork,
-            @RequestParam(required = false) String recifeAntigo,
-            @RequestParam(required = false) String santoAmaro,
-            @RequestParam(required = false) String saoJose
+            @RequestParam(defaultValue = "doesn't-exists") String available,
+            @RequestParam(defaultValue = "doesn't-exists") String occupied,
+            @RequestParam(defaultValue = "doesn't-exists") String atConstruction,
+            @RequestParam(defaultValue = "doesn't-exists") String abandoned,
+            @RequestParam(defaultValue = "doesn't-exists") String cowork,
+            @RequestParam(defaultValue = "doesn't-exists") String recifeAntigo,
+            @RequestParam(defaultValue = "doesn't-exists") String santoAmaro,
+            @RequestParam(defaultValue = "doesn't-exists") String saoJose
     ) {
         List<PropertyResponseDTO> properties = propertyService.listPropertiesByCheckboxFilterInformation(
                 available,
@@ -100,11 +96,9 @@ public class ImovelController {
         return ResponseEntity.status(HttpStatus.OK).body(properties);
     }
 
-    @PostMapping("/admin/search")
-    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToAdmin (
-            @RequestBody String address
-    ) throws Exception {
-        List <PropertyResponseDTO> properties = propertyService.listPropertiesToAdmin(address);
+    @GetMapping("/admin/search")
+    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToAdmin() throws Exception {
+        List <PropertyResponseDTO> properties = propertyService.listPropertiesToAdmin();
 
         return ResponseEntity.status(HttpStatus.OK).body(properties);
     }

@@ -173,11 +173,13 @@ public class PropertyResponseDTO {
 
     public PropertyResponseDTO(
             String nomeEdificil,
+            String endereco,
             String disponibilidade,
             String longetude,
             String latitude
     ) {
         this.nomeEdificil = nomeEdificil;
+        this.endereco = endereco;
         this.disponibilidade = disponibilidade;
         this.longetude = longetude;
         this.latitude = latitude;
