@@ -26,6 +26,7 @@ public class LotRequestDTO {
     private String disponibilidade;
 
     public LotRequestDTO(PropertyInformation property) {
+        this.investimento = property.getLot().getInvestimento();
         this.nomeEdificil = property.getLot().getNomeEdificil();
         this.autorizacaoDeInformacao = property.getLot().getAutorizacaoDeInformacao();
         this.tributacao = property.getLot().getTributacao();

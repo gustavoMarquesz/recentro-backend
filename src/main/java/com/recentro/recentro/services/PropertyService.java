@@ -58,10 +58,74 @@ public class PropertyService {
     public List<PropertyResponseDTO> listProperties(String address) {
         List<Property> propertiesFromRepository = propertyRepository.getPropertyByAddress(address);
 
+        List<PropertyResponseDTO> properties = new ArrayList<>();
+        properties.addAll(propertiesFromRepository.stream().map(
+                propertyData -> new PropertyResponseDTO (
+                        propertyData.getValorDeVenda(), propertyData.getId(), propertyData.getEndereco(),
+                        propertyData.getContatoProprietario(),
+                        propertyData.getProprietarioCartorio(),
+                        propertyData.getObservacao(),
+                        propertyData.getDescricaoJudicializacao(),
+                        propertyData.getProprietarioCampo(),
+                        propertyData.getPlanta(),
+                        propertyData.getRgi(),
+                        propertyData.getValorDoAluguel(),
+                        propertyData.getJudicializacao(),
+                        propertyData.getLongitude(),
+                        propertyData.getLatitude(),
+                        propertyData.getPlantaRegional(),
+                        propertyData.getUsoDoImovel(),
+                        propertyData.getFinances().getDsqfl(),
+                        propertyData.getFinances().getNumero(),
+                        propertyData.getFinances().getRua(),
+                        propertyData.getFinances().getDsq(),
+                        propertyData.getFinances().getTipoEmpreendimento(),
+                        propertyData.getFinances().getAreaTotal(),
+                        propertyData.getFinances().getBairro(),
+                        propertyData.getLot().getNomeEdificil(),
+                        propertyData.getLot().getAutorizacaoDeInformacao(),
+                        propertyData.getLot().getTributacao(),
+                        propertyData.getLot().getProprietarioLocalizado(),
+                        propertyData.getLot().getRestauranteCafes(),
+                        propertyData.getLot().getQualInvestimento(),
+                        propertyData.getLot().getInvestimento(),
+                        propertyData.getLot().getPichacao(),
+                        propertyData.getLot().getObsevacao(),
+                        propertyData.getLot().getAtividadeDeFuncionamento(),
+                        propertyData.getLot().getAcessibilidade(),
+                        propertyData.getLot().getLaudo(),
+                        propertyData.getLot().getNumeroPavimentoEmUso(),
+                        propertyData.getLot().getGrauDeRisco(),
+                        propertyData.getLot().getSituacao(),
+                        propertyData.getLot().getDisponibilidade(),
+                        propertyData.getLicensing().getNuProcesso(),
+                        propertyData.getLicensing().getNuLicenca(),
+                        propertyData.getLicensing().getProcessoAberto2018()
+
+                )
+        ).collect(Collectors.toList()));
+
+        return properties;
+    }
+
+
+    public List<LocationDTO> getAllPropertyLocations() {
+        List<Property> properties = propertyRepository.findAll();
+        List<LocationDTO> propertyLocations = new ArrayList<>();
+
+        for (Property property : properties) {
+            propertyLocations.add(new LocationDTO(property.getLatitude(), property.getLongitude()));
+        }
+
+        return propertyLocations;
+    }
+
+    public List<PropertyResponseDTO> listAllProperties() {
+        List<Property> propertiesFromRepository = propertyRepository.findAll();
         List<PropertyResponseDTO> properties = new ArrayList<PropertyResponseDTO>();
         properties.addAll(propertiesFromRepository.stream().map(
                 propertyData -> new PropertyResponseDTO (
-                        propertyData.getEndereco(),
+                        propertyData.getValorDeVenda(), propertyData.getId(), propertyData.getEndereco(),
                         propertyData.getContatoProprietario(),
                         propertyData.getProprietarioCartorio(),
                         propertyData.getObservacao(),
@@ -108,16 +172,7 @@ public class PropertyService {
     }
 
 
-    public List<LocationDTO> getAllPropertyLocations() {
-        List<Property> properties = propertyRepository.findAll();
-        List<LocationDTO> propertyLocations = new ArrayList<>();
 
-        for (Property property : properties) {
-            propertyLocations.add(new LocationDTO(property.getLatitude(), property.getLongitude()));
-        }
-
-        return propertyLocations;
-    }
 
     public Property updateProperty(Long id, PropertyRequestDTO propertyParam) throws Exception {
         Optional<Property> existingProperty = propertyRepository.findById(id);

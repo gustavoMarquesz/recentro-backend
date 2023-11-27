@@ -47,6 +47,8 @@ public class SecurityConfigurations {
                         .antMatchers(HttpMethod.POST, "/user/register").permitAll()
                         .antMatchers(HttpMethod.POST, "/user/login").permitAll()
                         .antMatchers(HttpMethod.GET, "/imovel/list").permitAll()
+                        .antMatchers(HttpMethod.GET, "/imovel/findall").permitAll()
+                        .antMatchers(HttpMethod.GET, "/imovel/findalltwo").permitAll()
                         .antMatchers(HttpMethod.GET, "/imovel/coordinates").permitAll()
                         .antMatchers(HttpMethod.GET, "/imovel/{id}").permitAll()
                         .antMatchers(HttpMethod.PUT, "/imovel/{id}").permitAll()
