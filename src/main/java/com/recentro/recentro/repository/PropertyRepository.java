@@ -22,8 +22,8 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
             "INNER JOIN property.lot lot " +
             "WHERE UPPER(lot.disponibilidade) LIKE UPPER(CONCAT('%', :available, '%')) " +
             "OR UPPER(lot.disponibilidade) = UPPER(:occupied) " +
+            "OR UPPER(lot.disponibilidade) = UPPER(:abandoned) " +
             "OR UPPER(lot.situacao) = UPPER(:atConstruction) " +
-            "OR UPPER(lot.atividadeDeFuncionamento) LIKE UPPER(CONCAT('%', :abandoned, '%')) " +
             "OR UPPER(lot.atividadeDeFuncionamento) LIKE UPPER(CONCAT('%', :cowork, '%')) " +
             "OR UPPER(finances.bairro) = UPPER(:RecifeAntigo) " +
             "OR UPPER(finances.bairro) = UPPER(:SantoAmaro) " +

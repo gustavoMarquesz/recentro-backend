@@ -64,7 +64,7 @@ public class ImovelController {
 
     @GetMapping("/search")
     public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToUserBySearchBar (
-            @RequestParam(required = false) String search
+            @RequestParam(value = "q", required = false) String search
     ) throws Exception {
         List <PropertyResponseDTO> properties = propertyService.listPropertiesWithFilteredData(search);
 
