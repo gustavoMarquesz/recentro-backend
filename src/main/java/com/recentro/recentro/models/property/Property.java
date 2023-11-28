@@ -49,6 +49,7 @@ public class Property {
     private Lot lot;
 
     public Property(PropertyRequestDTO property) {
+        this.id = property.getId();
         this.endereco = property.getEndereco();
         this.contatoProprietario = property.getContatoProprietario();
         this.proprietarioCartorio = property.getProprietarioCartorio();
@@ -73,6 +74,7 @@ public class Property {
     }
 
     public Property(
+            Long id,
             String endereco,
             String contatoProprietario,
             String proprietarioCartorio,
@@ -88,6 +90,7 @@ public class Property {
             String plantaRegional,
             String usoDoImovel
     ) {
+        this.id = id;
         this.endereco = endereco;
         this.contatoProprietario = contatoProprietario;
         this.proprietarioCartorio = proprietarioCartorio;
@@ -103,5 +106,6 @@ public class Property {
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
     }
+
 
 }

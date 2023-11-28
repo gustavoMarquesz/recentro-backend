@@ -1,6 +1,14 @@
 package com.recentro.recentro.models.property;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class PropertyResponseDTO {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
     public String endereco;
     public String contatoProprietario;
@@ -11,6 +19,8 @@ public class PropertyResponseDTO {
     public String planta;
     public String rgi;
     public String valorDoAluguel;
+
+    public String valorDeVenda;
     public String judicializacao;
     public Double longitude;
     public Double latitude;
@@ -43,50 +53,54 @@ public class PropertyResponseDTO {
     public String nuLicenca;
     public String ProcessoAberto2018;
 
+
+
     // To return all fields with related entities
     public PropertyResponseDTO(
-        String endereco,
-        String contatoProprietario,
-        String proprietarioCartorio,
-        String observacao,
-        String descricaoJudicializacao,
-        String proprietarioCampo,
-        String planta,
-        String rgi,
-        String valorDoAluguel,
-        String judicializacao,
-        Double longitude,
-        Double latitude,
-        String plantaRegional,
-        String usoDoImovel,
-        String dsqfl,
-        String numero,
-        String rua,
-        String dsq,
-        String tipoEmpreendimento,
-        String areaTotal,
-        String bairro,
-        String nomeEdificil,
-        String autorizacaoDeInformacao,
-        String tributacao,
-        String proprietarioLocalizado,
-        String restauranteCafes,
-        String qualInvestimento,
-        String investimento,
-        String pichacao,
-        String obsevacao,
-        String atividadeDeFuncionamento,
-        String acessibilidade,
-        String laudo,
-        String numeroPavimentoEmUso,
-        String grauDeRisco,
-        String situacao,
-        String disponibilidade,
-        String nuProcesso,
-        String nuLicenca,
-        String ProcessoAberto2018
+
+            String valorDeVenda, Long id, String endereco,
+            String contatoProprietario,
+            String proprietarioCartorio,
+            String observacao,
+            String descricaoJudicializacao,
+            String proprietarioCampo,
+            String planta,
+            String rgi,
+            String valorDoAluguel,
+            String judicializacao,
+            Double longitude,
+            Double latitude,
+            String plantaRegional,
+            String usoDoImovel,
+            String dsqfl,
+            String numero,
+            String rua,
+            String dsq,
+            String tipoEmpreendimento,
+            String areaTotal,
+            String bairro,
+            String nomeEdificil,
+            String autorizacaoDeInformacao,
+            String tributacao,
+            String proprietarioLocalizado,
+            String restauranteCafes,
+            String qualInvestimento,
+            String investimento,
+            String pichacao,
+            String obsevacao,
+            String atividadeDeFuncionamento,
+            String acessibilidade,
+            String laudo,
+            String numeroPavimentoEmUso,
+            String grauDeRisco,
+            String situacao,
+            String disponibilidade,
+            String nuProcesso,
+            String nuLicenca,
+            String ProcessoAberto2018
     ) {
         // Property data
+        this.id = id;
         this.endereco = endereco;
         this.contatoProprietario = contatoProprietario;
         this.proprietarioCartorio = proprietarioCartorio;
@@ -101,6 +115,8 @@ public class PropertyResponseDTO {
         this.latitude = latitude;
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
+        this.valorDeVenda = valorDeVenda;
+
 
         // Finances data
         this.dsqfl = dsqfl;
@@ -167,4 +183,6 @@ public class PropertyResponseDTO {
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
     }
+
+
 }

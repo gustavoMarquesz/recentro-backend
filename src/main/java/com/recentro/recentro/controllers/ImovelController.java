@@ -17,8 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/imovel")
@@ -85,6 +87,17 @@ public class ImovelController {
         List<LocationDTO> propertyLocations = propertyService.getAllPropertyLocations();
         return new ResponseEntity<>(propertyLocations, HttpStatus.OK);
     }
+
+    // No seu controlador
+    @GetMapping("/findall")
+    public ResponseEntity<List<PropertyResponseDTO>> getAllProperty() {
+        List<PropertyResponseDTO> propertyResponseDTOs = propertyService.listAllProperties();
+        System.out.println(propertyResponseDTOs);
+        return new ResponseEntity<>(propertyResponseDTOs, HttpStatus.OK);
+    }
+
+
+
 
 
 //    @PutMapping("/{id}")

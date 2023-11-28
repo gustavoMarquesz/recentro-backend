@@ -38,6 +38,7 @@ public class Lot {
     private Property property;
 
     public Lot(LotRequestDTO property) {
+        this.investimento  = property.getInvestimento();
         this.nomeEdificil = property.getNomeEdificil();
         this.autorizacaoDeInformacao = property.getAutorizacaoDeInformacao();
         this.tributacao = property.getTributacao();
