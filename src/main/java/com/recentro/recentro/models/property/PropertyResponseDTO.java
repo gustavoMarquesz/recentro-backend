@@ -16,6 +16,8 @@ public class PropertyResponseDTO {
     public String endereco;
     public String contatoProprietario;
     public String proprietarioCartorio;
+
+    public String coincidenciaProprietario;
     public String observacao;
     public String descricaoJudicializacao;
     public String proprietarioCampo;
@@ -101,8 +103,8 @@ public class PropertyResponseDTO {
             String disponibilidade,
             String nuProcesso,
             String nuLicenca,
-            String ProcessoAberto2018
-    ) {
+            String ProcessoAberto2018,
+            String coincidenciaProprietario) {
         // Property data
         this.id = id;
         this.endereco = endereco;
@@ -110,6 +112,7 @@ public class PropertyResponseDTO {
         this.proprietarioCartorio = proprietarioCartorio;
         this.observacao = observacao;
         this.descricaoJudicializacao = descricaoJudicializacao;
+        this.coincidenciaProprietario = contatoProprietario;
         this.proprietarioCampo = proprietarioCampo;
         this.planta = planta;
         this.rgi = rgi;
