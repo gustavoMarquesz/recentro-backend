@@ -16,7 +16,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> getAllPropertyData();
 
     @Query("SELECT new com.recentro.recentro.models.property.PropertyResponseDTO(" +
-            "lot.nomeEdificil, property.endereco, lot.disponibilidade, property.longetude, property.latitude " + ") " +
+            "lot.nomeEdificil, property.endereco, lot.disponibilidade, property.longitude, property.latitude " + ") " +
             "FROM Property property " +
             "INNER JOIN property.finances finances " +
             "INNER JOIN property.lot lot " +
@@ -41,7 +41,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     );
 
     @Query("SELECT new com.recentro.recentro.models.property.PropertyResponseDTO( " +
-            "lot.nomeEdificil, property.endereco, lot.disponibilidade, property.longetude, property.latitude " + ") " +
+            "lot.nomeEdificil, property.endereco, lot.disponibilidade, property.longitude, property.latitude " + ") " +
             "FROM Property property " +
             "INNER JOIN property.finances finances " +
             "INNER JOIN property.lot lot " +

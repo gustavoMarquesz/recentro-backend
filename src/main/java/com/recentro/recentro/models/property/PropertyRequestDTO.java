@@ -1,31 +1,37 @@
 package com.recentro.recentro.models.property;
 
-import com.recentro.recentro.models.PropertyInformation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @NoArgsConstructor
 public class PropertyRequestDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     // Property data
-    String endereco;
-    String contatoProprietario;
-    String proprietarioCartorio;
-    String coincidenciaProprietario;
-    String observacao;
-    String descricaoJudicializacao;
-    String proprietarioCampo;
-    String planta;
-    String rgi;
-    String valorDoAluguel;
-    String valorDeVenda;
-    String judicializacao;
-    String longetude;
-    String latitude;
-    String plantaRegional;
-    String usoDoImovel;
-    String neighborhood;
+    private String endereco;
+    private String contatoProprietario;
+    private String proprietarioCartorio;
+    private String coincidenciaProprietario;
+    private String observacao;
+    private String descricaoJudicializacao;
+    private String proprietarioCampo;
+    private String planta;
+    private String rgi;
+    private String valorDoAluguel;
+    private String valorDeVenda;
+    private String judicializacao;
+    private Double longitude;
+    private Double latitude;
+    private String plantaRegional;
+    private String usoDoImovel;
+    private String neighborhood;
 
     // Checkbox possible filter data
     String available;
@@ -37,22 +43,22 @@ public class PropertyRequestDTO {
     String santoAmaro;
     String saoJose;
 
-    public PropertyRequestDTO(PropertyInformation property) {
-        this.endereco = property.getProperty().getEndereco();
-        this.contatoProprietario = property.getProperty().getContatoProprietario();
-        this.proprietarioCartorio = property.getProperty().getProprietarioCartorio();
-        this.coincidenciaProprietario = property.getProperty().getCoincidenciaProprietario();
-        this.observacao = property.getProperty().getObservacao();
-        this.descricaoJudicializacao = property.getProperty().getJudicializacao();
-        this.proprietarioCampo = property.getProperty().getProprietarioCampo();
-        this.planta = property.getProperty().getPlanta();
-        this.rgi = property.getProperty().getRgi();
-        this.valorDoAluguel = property.getProperty().getValorDoAluguel();
-        this.valorDeVenda = property.getProperty().getValorDeVenda();
-        this.judicializacao = property.getProperty().getJudicializacao();
-        this.longetude = property.getProperty().getLongetude();
-        this.latitude = property.getProperty().getLatitude();
-        this.plantaRegional = property.getProperty().getPlantaRegional();
-        this.usoDoImovel = property.getProperty().getUsoDoImovel();
+    public PropertyRequestDTO(Property property) { // Corrigido para aceitar um objeto Property, não PropertyRequestDTO
+        this.endereco = property.getEndereco();
+        this.contatoProprietario = property.getContatoProprietario();
+        this.proprietarioCartorio = property.getProprietarioCartorio();
+        this.coincidenciaProprietario = property.getCoincidenciaProprietario();
+        this.observacao = property.getObservacao();
+        this.descricaoJudicializacao = property.getDescricaoJudicializacao();
+        this.proprietarioCampo = property.getProprietarioCampo();
+        this.planta = property.getPlanta();
+        this.rgi = property.getRgi();
+        this.valorDoAluguel = property.getValorDoAluguel();
+        this.valorDeVenda = property.getValorDeVenda();
+        this.judicializacao = property.getJudicializacao();
+        this.longitude = property.getLongitude();
+        this.latitude = property.getLatitude();
+        this.plantaRegional = property.getPlantaRegional();
+        this.usoDoImovel = property.getUsoDoImovel();
     }
 }

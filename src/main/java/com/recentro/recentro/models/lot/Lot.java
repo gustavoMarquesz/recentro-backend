@@ -1,6 +1,5 @@
 package com.recentro.recentro.models.lot;
 
-import com.recentro.recentro.models.PropertyInformation;
 import com.recentro.recentro.models.property.Property;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,6 +37,7 @@ public class Lot {
     private Property property;
 
     public Lot(LotRequestDTO property) {
+        this.investimento  = property.getInvestimento();
         this.nomeEdificil = property.getNomeEdificil();
         this.autorizacaoDeInformacao = property.getAutorizacaoDeInformacao();
         this.tributacao = property.getTributacao();

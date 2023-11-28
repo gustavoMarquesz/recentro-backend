@@ -5,6 +5,7 @@ import com.recentro.recentro.models.*;
 import com.recentro.recentro.models.finances.Finances;
 import com.recentro.recentro.models.licensing.Licensing;
 import com.recentro.recentro.models.lot.Lot;
+import com.recentro.recentro.models.property.LocationDTO;
 import com.recentro.recentro.models.property.Property;
 import com.recentro.recentro.models.property.PropertyRequestDTO;
 import com.recentro.recentro.models.property.PropertyResponseDTO;
@@ -17,8 +18,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/imovel")
@@ -111,6 +114,24 @@ public class ImovelController {
         licensingService.deleteLicensing(id);
         return ResponseEntity.status(HttpStatus.OK).body("Imovel deleted successfully.");
     }
+
+    @GetMapping("/locations")
+    public ResponseEntity<List<LocationDTO>> getAllPropertyLocations() {
+        List<LocationDTO> propertyLocations = propertyService.getAllPropertyLocations();
+        return new ResponseEntity<>(propertyLocations, HttpStatus.OK);
+    }
+
+    // No seu controlador
+    @GetMapping("/findall")
+    public ResponseEntity<List<PropertyResponseDTO>> getAllProperty() {
+        List<PropertyResponseDTO> propertyResponseDTOs = propertyService.listAllProperties();
+        System.out.println(propertyResponseDTOs);
+        return new ResponseEntity<>(propertyResponseDTOs, HttpStatus.OK);
+    }
+
+
+
+
 
 //    @PutMapping("/{id}")
 //    public ResponseEntity<Object> updatePropriedade(@PathVariable(value="id") Long id,
