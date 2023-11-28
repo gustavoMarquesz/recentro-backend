@@ -106,6 +106,4 @@ public class Property {
         this.plantaRegional = plantaRegional;
         this.usoDoImovel = usoDoImovel;
     }
-
-
 }

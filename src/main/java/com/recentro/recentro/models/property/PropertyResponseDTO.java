@@ -1,9 +1,12 @@
 package com.recentro.recentro.models.property;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PropertyResponseDTO {
 
     @Id
@@ -54,11 +57,12 @@ public class PropertyResponseDTO {
     public String ProcessoAberto2018;
 
 
-
     // To return all fields with related entities
     public PropertyResponseDTO(
 
-            String valorDeVenda, Long id, String endereco,
+            String valorDeVenda,
+            Long id,
+            String endereco,
             String contatoProprietario,
             String proprietarioCartorio,
             String observacao,
@@ -184,5 +188,17 @@ public class PropertyResponseDTO {
         this.usoDoImovel = usoDoImovel;
     }
 
-
+    public PropertyResponseDTO(
+            String nomeEdificil,
+            String endereco,
+            String disponibilidade,
+            Double longitude,
+            Double latitude
+    ) {
+        this.nomeEdificil = nomeEdificil;
+        this.endereco = endereco;
+        this.disponibilidade = disponibilidade;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 }

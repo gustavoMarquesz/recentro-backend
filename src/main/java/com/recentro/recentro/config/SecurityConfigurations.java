@@ -54,7 +54,7 @@ public class SecurityConfigurations {
                         .antMatchers(HttpMethod.PUT, "/imovel/{id}").permitAll()
                         .antMatchers(HttpMethod.DELETE, "/imovel/{id}").permitAll()
                         .antMatchers(HttpMethod.POST, "/imovel/register").permitAll()
-                        .antMatchers(HttpMethod.POST, "/imovel/search").permitAll()
+                        .antMatchers(HttpMethod.GET, "/imovel/search").permitAll()
                         .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v2/api-docs", "/swagger-resources/**", "/webjars/**").permitAll()
                         .anyRequest().authenticated()
                 ).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class );

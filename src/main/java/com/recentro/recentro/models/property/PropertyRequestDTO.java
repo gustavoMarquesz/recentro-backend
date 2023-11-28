@@ -11,7 +11,6 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 public class PropertyRequestDTO {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;

@@ -55,8 +55,8 @@ public class PropertyService {
         throw new ExistingEmail();
     }
 
-    public List<PropertyResponseDTO> listProperties(String address) {
-        List<Property> propertiesFromRepository = propertyRepository.getPropertyByAddress(address);
+    public List<PropertyResponseDTO> listPropertiesToAdmin() {
+        List<Property> propertiesFromRepository = propertyRepository.getAllPropertyData();
 
         List<PropertyResponseDTO> properties = new ArrayList<>();
         properties.addAll(propertiesFromRepository.stream().map(
@@ -171,8 +171,35 @@ public class PropertyService {
         return properties;
     }
 
+    public List<PropertyResponseDTO> listPropertiesByCheckboxFilterInformation(
+            String available,
+            String occupied,
+            String atConstruction,
+            String abandoned,
+            String cowork,
+            String recifeAntigo,
+            String santoAmaro,
+            String saoJose
+    ) {
+        List<PropertyResponseDTO> propertiesFromRepository = propertyRepository.getPropertiesByFilteringWithCheckboxInformation(
+                        available,
+                        occupied,
+                        atConstruction,
+                        abandoned,
+                        cowork,
+                        recifeAntigo,
+                        santoAmaro,
+                        saoJose
+        );
 
+        return propertiesFromRepository;
+    }
 
+    public List<PropertyResponseDTO> listPropertiesWithFilteredData(String search) {
+        List<PropertyResponseDTO> propertiesFromRepository = propertyRepository.getPropertyDataByNameOrNeighborhood(search);
+
+        return propertiesFromRepository;
+    }
 
     public Property updateProperty(Long id, PropertyRequestDTO propertyParam) throws Exception {
         Optional<Property> existingProperty = propertyRepository.findById(id);

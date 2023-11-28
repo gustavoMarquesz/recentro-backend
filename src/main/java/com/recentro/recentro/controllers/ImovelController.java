@@ -7,6 +7,7 @@ import com.recentro.recentro.models.licensing.Licensing;
 import com.recentro.recentro.models.lot.Lot;
 import com.recentro.recentro.models.property.LocationDTO;
 import com.recentro.recentro.models.property.Property;
+import com.recentro.recentro.models.property.PropertyRequestDTO;
 import com.recentro.recentro.models.property.PropertyResponseDTO;
 import com.recentro.recentro.services.FinancesService;
 import com.recentro.recentro.services.PropertyService;
@@ -64,11 +65,43 @@ public class ImovelController {
         return ResponseEntity.ok().body(responseBody);
     }
 
-    @PostMapping("/search")
-    public ResponseEntity<List<PropertyResponseDTO>> listarPropriedades (
-            @RequestBody String address
+    @GetMapping("/search")
+    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToUserBySearchBar (
+            @RequestParam(value = "q", required = false) String search
     ) throws Exception {
-        List <PropertyResponseDTO> properties = propertyService.listProperties(address);
+        List <PropertyResponseDTO> properties = propertyService.listPropertiesWithFilteredData(search);
+
+        return ResponseEntity.status(HttpStatus.OK).body(properties);
+    }
+
+    @GetMapping("/checkbox-filter")
+    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesByCheckboxFilter(
+            @RequestParam(defaultValue = "doesn't-exists") String available,
+            @RequestParam(defaultValue = "doesn't-exists") String occupied,
+            @RequestParam(defaultValue = "doesn't-exists") String atConstruction,
+            @RequestParam(defaultValue = "doesn't-exists") String abandoned,
+            @RequestParam(defaultValue = "doesn't-exists") String cowork,
+            @RequestParam(defaultValue = "doesn't-exists") String recifeAntigo,
+            @RequestParam(defaultValue = "doesn't-exists") String santoAmaro,
+            @RequestParam(defaultValue = "doesn't-exists") String saoJose
+    ) {
+        List<PropertyResponseDTO> properties = propertyService.listPropertiesByCheckboxFilterInformation(
+                available,
+                occupied,
+                atConstruction,
+                abandoned,
+                cowork,
+                recifeAntigo,
+                santoAmaro,
+                saoJose
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(properties);
+    }
+
+    @GetMapping("/admin/search")
+    public ResponseEntity<List<PropertyResponseDTO>> listPropertiesToAdmin() throws Exception {
+        List <PropertyResponseDTO> properties = propertyService.listPropertiesToAdmin();
 
         return ResponseEntity.status(HttpStatus.OK).body(properties);
     }
