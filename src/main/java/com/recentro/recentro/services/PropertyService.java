@@ -100,9 +100,9 @@ public class PropertyService {
                         propertyData.getLot().getDisponibilidade(),
                         propertyData.getLicensing().getNuProcesso(),
                         propertyData.getLicensing().getNuLicenca(),
-                        propertyData.getLicensing().getProcessoAberto2018()
+                        propertyData.getLicensing().getProcessoAberto2018(),
 
-                )
+                        propertyData.getCoincidenciaProprietario())
         ).collect(Collectors.toList()));
 
         return properties;
@@ -164,7 +164,8 @@ public class PropertyService {
                         propertyData.getLot().getDisponibilidade(),
                         propertyData.getLicensing().getNuProcesso(),
                         propertyData.getLicensing().getNuLicenca(),
-                        propertyData.getLicensing().getProcessoAberto2018()
+                        propertyData.getLicensing().getProcessoAberto2018(),
+                        propertyData.getCoincidenciaProprietario()
                 )
         ).collect(Collectors.toList()));
 
