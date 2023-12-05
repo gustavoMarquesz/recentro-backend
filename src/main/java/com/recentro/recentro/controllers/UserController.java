@@ -47,11 +47,18 @@ public class UserController {
         var auth = authenticationManager.authenticate(userPassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
-        // Crie uma classe TokenResponseDTO para representar a resposta com o token JWT
-        LoginRespondeDTO responseDTO = new LoginRespondeDTO(token);
+
+        // Obtém informações do usuário autenticado
+        String email = user.getEmail();
+
+        String role = auth.getAuthorities().stream().findFirst().orElseThrow().getAuthority();
+
+        // Cria a resposta com o token e outras informações
+        LoginRespondeDTO responseDTO = new LoginRespondeDTO(token, email,  role);
 
         return ResponseEntity.ok(responseDTO);
     }
+
 
 
 }
